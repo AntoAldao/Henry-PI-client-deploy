@@ -8,7 +8,7 @@ const getGenres = async (req, res) => {
         const genres = await Genre.findAll();
         res.status(200).send(genres);
     } catch (error) {
-        res.status(404).send(error.message);
+        res.status(400).send(error.message);
     }
 };
 module.exports = getGenres;

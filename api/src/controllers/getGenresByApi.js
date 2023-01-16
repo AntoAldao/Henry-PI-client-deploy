@@ -14,7 +14,7 @@ const getGenresByApi = async (req, res) => {
         })
         
         await Genre.bulkCreate(genres); // guardo los generos en la bd
-        res.status(200).send('generos guardados en la bd');
+        res.status(201).send('generos guardados en la bd');
         
     } catch (error) {
         res.status(400).send(error);

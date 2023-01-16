@@ -16,6 +16,7 @@ const getVideogames = async (req, res) => {
         const { name } = req.query;
         let api =[]
         let allVideoGames = []
+        let dbVideoGames = []
         
         for (let i = 1; i <= 5; i++) {
             api.push(await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=${i}`));
@@ -35,7 +36,17 @@ const getVideogames = async (req, res) => {
             allVideoGames.push(apiVideoGames); // guardo los juegos de la api en un array
         })
         .then(async () => {
-            allVideoGames.push(await Videogame.findAll({ include: Genre })); // guardo los juegos de la bd en el mismo array
+            dbVideoGames.push(await Videogame.findAll({ include: Genre })); // guardo los juegos de la bd en el mismo array
+            dbVideoGames = dbVideoGames.flat(); // como devuelve un array de arrays, lo paso a un array plano
+            dbVideoGames = dbVideoGames.map((game) => { // mapeo para obtener solo los datos que necesito
+                return {
+                    name: game.name,
+                    image: game.image,
+                    genres: game.genres.map((genre) => genre.name),
+                    id: game.id,
+                };
+            });
+            allVideoGames.push(dbVideoGames); // guardo los juegos de la bd en el mismo array
             allVideoGames = allVideoGames.flat(); // como devuelve un array de arrays, lo paso a un array plano
             if (name) { // si hay query, filtro los juegos por nombre
                 allVideoGames = allVideoGames.filter((game) => 
@@ -55,8 +66,8 @@ const getVideogames = async (req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
-        res.status(400).send(error.mesaage);
+        if (error.mesaage === 'No se encontraron videojuegos') res.status(404).send(error.mesaage);
+        else{res.status(400).send(error.mesaage);}
     }    
 
 
