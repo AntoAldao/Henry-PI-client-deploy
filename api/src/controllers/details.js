@@ -29,23 +29,24 @@ const details = async (req, res) => {
     })
     .catch((error) => {})
     try {
-        if (!videogame) 
+        if (!videogame){
             videogame = await Videogame.findByPk(id,{include:Genre}) // busco el juego en la bd
-        
+            videogame = {
+                id : videogame.id,
+                name: videogame.name,
+                image: videogame.image,
+                genres: videogame.genres.map((genre) => genre.name),
+                description: videogame.description,
+                date: videogame.date,
+                rating: videogame.rating,
+                platforms: videogame.platforms,
+            }
+        }
     } catch (error) {
         
     }
     if(videogame){ // si existe el juego en la bd, devuelvo los detalles del juego
-        videogame = {
-            id : videogame.id,
-            name: videogame.name,
-            image: videogame.image,
-            genres: videogame.genres.map((genre) => genre.name),
-            description: videogame.description,
-            date: videogame.date,
-            rating: videogame.rating,
-            platforms: videogame.platforms,
-        }
+        
         return res.status(200).send(videogame);
     }else{ 
         return res.status(404).send('No se encontro el juego'); // si no existe el juego en la bd, devuelvo un mensaje

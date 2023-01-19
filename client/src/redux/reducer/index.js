@@ -7,12 +7,8 @@ import {
     PUT_VIDEOGAME,
     DELETE_VIDEOGAME,
     FILTER_BY_GENRE,
-    FILTER_BY_CREATED,
-    FILTER_BY_API,
-    ORDER_BY_NAME_ASC,
-    ORDER_BY_NAME_DESC,
-    ORDER_BY_RATING_ASC,
-    ORDER_BY_RATING_DESC,
+    FILTER_BY_CREATED_OR_API,
+    ORDER
 } from '../actions/index.js';
 
 
@@ -21,15 +17,17 @@ const initialState = {
     videogames : [],
     genres : [],
     OrderBy : "",
-    videogamesFilteredByGenre : [],
-    videogamesFilteredByCreated : [],
+    FilteredByGenre : [], 
+    FilteredByCreatedOrApi : "",
+    videogameDetail : {},
 };
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_VIDEOGAMES:
             return {
                 ...state,
-                allVideogames : action.payload
+                allVideogames : action.payload,
+                videogames : action.payload
             }   
         case GET_VIDEOGAMES_BY_NAME:
             return {
@@ -46,22 +44,38 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 genres : action.payload
             }
-        case POST_VIDEOGAME:
+        // case POST_VIDEOGAME:
+        //     return {
+        //         ...state,
+        //         allVideogames : action.payload
+        //     }
+        // case PUT_VIDEOGAME:
+        //     return {
+        //         ...state,
+        //         allVideogames : action.payload
+        //     }
+        // case DELETE_VIDEOGAME:
+        //     return {
+        //         ...state,
+        //         allVideogames : action.payload
+        //     }
+        case FILTER_BY_GENRE:
             return {
                 ...state,
-                allVideogames : action.payload
+                FilteredByGenre : action.payload
             }
-        case PUT_VIDEOGAME:
+        case FILTER_BY_CREATED_OR_API:
             return {
                 ...state,
-                allVideogames : action.payload
+                FilteredByCreatedOrApi: action.payload
             }
-        case DELETE_VIDEOGAME:
+        case ORDER:
             return {
                 ...state,
-                allVideogames : action.payload
+                OrderBy : action.payload
             }
-
+        default:
+            return {...state};
 
     }
 };
