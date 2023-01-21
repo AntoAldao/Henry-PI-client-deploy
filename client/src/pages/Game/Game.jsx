@@ -1,22 +1,24 @@
 import {Link} from "react-router-dom"  // import the link to the detail of the game
-import GameDetails from "../components/GameDetails/GameDetails"
+import GameDetails from "../../components/GameDetails/GameDetails"
 import { useParams } from "react-router-dom";
 import {    useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getVideogameDetail } from "../../src/redux/actions/index";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import style from "./Game.module.css"
+
 
 const Game = () => {
     const { id } = useParams();
-    const dispatch = useDispatch(); 
-    const game = useSelector((state) => state.videogameDetail);
-    console.log(game)
+    const [game, setGame] = useState({})
     useEffect(() => {
-        dispatch(getVideogameDetail(id));
+        fetch(`http://localhost:3001/api/videogames/${id}`)
+        .then(response => response.json())
+        .then(data => setGame(data))
     }, [])
+    
     return(
-        <div> 
+        <div className={style.cardDetail}> 
             <h1>{game.name}</h1>
+
             <GameDetails
                 name={game.name}
                 image={game.image}

@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export const GET_VIDEOGAMES = 'GET_VIDEOGAMES';
+export const SET_VIDEOGAMES = 'SET_VIDEOGAMES';
 export const GET_VIDEOGAMES_BY_NAME = 'GET_VIDEOGAMES_BY_NAME';
-export const GET_VIDEOGAME_DETAIL = 'GET_VIDEOGAME_DETAIL';
 export const GET_GENRES = 'GET_GENRES';
 export const POST_VIDEOGAME = 'POST_VIDEOGAME';
 export const PUT_VIDEOGAME = 'PUT_VIDEOGAME';
@@ -10,6 +10,7 @@ export const DELETE_VIDEOGAME = 'DELETE_VIDEOGAME';
 export const FILTER_BY_GENRE = 'FILTER_BY_GENRE';
 export const FILTER_BY_CREATED_OR_API = 'FILTER_BY_CREATED_OR_API';
 export const ORDER= 'ORDER';
+export const SETPAGE = 'SETPAGE';
 
 export const getVideogames = () => async (dispatch) => {
     const response = await axios.get('http://localhost:3001/api/videogames')
@@ -17,6 +18,17 @@ export const getVideogames = () => async (dispatch) => {
     return (
         dispatch({
             type: GET_VIDEOGAMES,
+            payload: data
+        })
+    )
+};
+
+export const setVideogames = () => async (dispatch) => {
+    const response = await axios.get('http://localhost:3001/api/videogames')
+    const data = response.data;
+    return (
+        dispatch({
+            type: SET_VIDEOGAMES,
             payload: data
         })
     )
@@ -34,18 +46,6 @@ export const getVideogamesByName = (name) => async (dispatch) => {
     )
 }
 
-export const getVideogameDetail = (id) => async (dispatch) => {
-    
-    const response = await axios.get(`http://localhost:3001/api/videogames/${id}`)
-    const data = response.data;
-    return (
-        dispatch({
-            type: GET_VIDEOGAME_DETAIL,
-            payload: data
-        })
-    )
-}
-
 export const getGenres = () => async (dispatch) => {
     const response = await axios.get('http://localhost:3001/api/genres')
     const data = response.data;
@@ -58,18 +58,6 @@ export const getGenres = () => async (dispatch) => {
     
 }
 
-export const postVideogame = (body) => async (dispatch) => {
-    
-    const response = await axios.post('http://localhost:3001/api/videogame', body)
-    const data = response.data;
-    return (
-        dispatch({
-            type: POST_VIDEOGAME,
-            payload: data
-        })
-    )
-    
-}
 
 export const putVideogame = (payload) => async (dispatch) => {
     const {id,...body} = payload;
@@ -95,22 +83,39 @@ export const deleteVideogame = (id) => async (dispatch) => {
 }
 
 export const filterByGenre = (genre) => async (dispatch) => {
-    return {
-        type: FILTER_BY_GENRE,
-        payload: genre
-    }
+    return (
+        dispatch({
+            type: FILTER_BY_GENRE,
+            payload: genre
+        })
+    )
 }
 
 export const filterByCreatedOrApi = (payload) => async (dispatch) => {
-    return {
-        type: FILTER_BY_CREATED_OR_API,
-        payload: payload
-    }
+    return (
+        dispatch({
+            type: FILTER_BY_CREATED_OR_API,
+            payload: payload
+        })
+    )
 }
 
 export const order = (payload) => async (dispatch) => {
-    return {
-        type: ORDER,
-        payload: payload
-    }
+    return (
+        dispatch({
+            type: ORDER,
+            payload: payload
+        })
+    )
+}
+
+export const setPage = (payload) => (dispatch) => {
+
+    return (
+        dispatch({
+            type: SETPAGE,
+            payload: payload
+
+        })
+    )
 }

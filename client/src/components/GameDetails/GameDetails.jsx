@@ -1,30 +1,45 @@
+import style from "./GameDetails.module.css";
 
 const GameDetails = (props) => {
     return (
-    <div >
-        <img src={props.image} alt={props.name} />
+    <div className={style.card}>
+        <img src={props.image} alt={props.name} className={style.image}/>
         <div dangerouslySetInnerHTML={{__html:props.description}}/> 
-        <h2> Genres</h2>
-        <ul>
-            {props.genres?.map((genre, index) => {
-                return(
-                    <li key={index}>{genre}</li>
-                )
-            })}
+        <div className={style.info}>
 
-        </ul>
-        <h2> Platforms</h2>
-        <ul>
-            {props.platforms?.map((platform, index) => {
-                return(
-                    <li key={index}>{platform}</li>
-                )
-            })}
-        </ul>
-        <h2> Rating</h2>
-        <p>{props.rating}</p>
-        <h2> Released</h2>
-        <p>{props.date}</p>
+            <div className={style.genres}>
+                <h2> Genres</h2>
+                <ul>
+                    {props.genres?.map((genre, index) => {
+                        return(
+                            <li key={index}>{genre}</li>
+                        )
+                    })}
+
+                </ul>
+            </div>
+                
+            <div>
+                <h2> Platforms</h2>
+                <ul>
+                    {props.platforms?.map((platform, index) => {
+                        return(
+                            <li key={index}>{platform}</li>
+                        )
+                    })}
+                </ul>
+            </div>
+
+            <div>
+                <h2> Rating</h2>
+                <p>{props.rating}</p>
+            </div>
+
+            <div>
+                <h2> Released</h2>
+                <p>{props.date}</p>
+            </div>
+        </div>
     </div>
     )
 }

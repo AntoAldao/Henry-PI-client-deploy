@@ -1,4 +1,4 @@
-import CreateGame from '../components/CreateGame/CreateGame.jsx'
+import CreateGame from '../../components/CreateGame/CreateGame.jsx'
 const Create = () => {
     return (
         <div>

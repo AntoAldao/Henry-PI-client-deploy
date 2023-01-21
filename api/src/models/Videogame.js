@@ -18,12 +18,12 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     date:{
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       defaultValue: DataTypes.NOW,
     },
     rating:{
       type: DataTypes.STRING,
-      defaultValue: "0",
+      defaultValue: "Not rated",
     },
     platforms:{
       type: DataTypes.ARRAY(DataTypes.STRING),

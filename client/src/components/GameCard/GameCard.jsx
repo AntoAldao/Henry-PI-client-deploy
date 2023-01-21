@@ -1,17 +1,20 @@
 import { Link } from "react-router-dom";
+import style from "./GameCard.module.css";
 const GameCard = (props) => {
     return (
-        <div> 
+        <div className={style.card}> 
             <Link to={`/videogame/${props.id}`}>
-                <button><h1>{props.name}</h1></button>
+                <button className={style.name}><h1>{props.name}</h1></button>
             </Link>
-            {/* <div >
-                <h2> Genres</h2>
-                <h3>{props.genres}</h3>
-                <img src={props.image} alt={props.name} />
-            </div> */}
-            {/* <Link to={`/videogame/${props.id}`}>More info</Link>    */}
-            {/* link to the detail of the game */}
+             <div >
+                <h3> Genres</h3>
+                <ul className={style.list}>
+                    {props.genres?.map((genre, index) => {
+                        return <li key={index}>{genre}</li>
+                    })}
+                </ul>
+                <img src={props.image} alt={props.name} className = {style.image}/>
+            </div> 
         </div>  
     )
 };

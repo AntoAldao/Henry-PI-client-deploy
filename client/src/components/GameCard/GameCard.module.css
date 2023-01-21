@@ -1,0 +1,22 @@
+.card{
+   border: 3px solid #000;
+   width: 350px;
+    height: 350px;
+    border-radius: 10%;
+}
+.image{
+    width: 200px;
+    
+} 
+.name {
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    background: none;
+    border: none;
+    
+}
+.list{
+    list-style: none;
+}

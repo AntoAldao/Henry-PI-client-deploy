@@ -31,6 +31,7 @@ const getVideogames = async (req, res) => {
                     image: game.background_image,
                     genres: game.genres.map((genre) => genre.name),
                     id: game.id,
+                    created: false,
                 };
             });
             allVideoGames.push(apiVideoGames); // guardo los juegos de la api en un array
@@ -44,6 +45,7 @@ const getVideogames = async (req, res) => {
                     image: game.image,
                     genres: game.genres.map((genre) => genre.name),
                     id: game.id,
+                    created: true,
                 };
             });
             allVideoGames.push(dbVideoGames); // guardo los juegos de la bd en el mismo array
