@@ -27,6 +27,8 @@ const Game = () => {
                 platforms={game.platforms}
                 rating={game.rating}
                 date={game.date}
+                id={game.id}
+                created = {game.created}
             />
             <Link to={`/home`}>
                 <button> back </button>

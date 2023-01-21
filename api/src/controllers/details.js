@@ -25,6 +25,7 @@ const details = async (req, res) => {
             date: response.data.released,
             rating: response.data.rating,
             platforms: response.data.platforms.map((p) => p.platform.name),
+            created: false
         }
     })
     .catch((error) => {})
@@ -40,6 +41,7 @@ const details = async (req, res) => {
                 date: videogame.date,
                 rating: videogame.rating,
                 platforms: videogame.platforms,
+                created: true
             }
         }
     } catch (error) {
