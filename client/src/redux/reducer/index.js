@@ -16,9 +16,9 @@ const initialState = {
     allVideogames : [],
     videogames : [],
     genres : [],
-    OrderBy : "",
-    FilteredByGenre : [], 
-    FilteredByCreatedOrApi : "",
+    OrderBy : "Order by ... ",
+    FilteredByGenre : "Filter by genre", 
+    FilteredByCreatedOrApi : "Filter by ... ",
     platforms : ["PC","PlayStation 5","Xbox One","PlayStation 4","Xbox Series S/X",
                             "Nintendo Switch","iOS","Android","Nintendo 3DS","Nintendo DS",
                             "Nintendo DSi","macOS","Linux","Xbox 360","Xbox","PlayStation 3",
@@ -39,34 +39,34 @@ const rootReducer = (state = initialState, action) => {
             } 
         case SET_VIDEOGAMES:
             let videogames = action.payload;
-            if (state.OrderBy === "A-Z") {
+            if (state.OrderBy === "Name A-Z") {
                 videogames = videogames.sort((a, b) => { 
-                    if (a.name > b.name) {
+                    if (a.name.toLowerCase() > b.name.toLowerCase()) {
                         return 1;
                     }
-                    if (a.name < b.name) {
+                    if (a.name.toLowerCase() < b.name.toLowerCase()) {
                         return -1;
                     }
                     return 0;
                 })
             }
-            else if (state.OrderBy === "Z-A") {
+            else if (state.OrderBy === "Name Z-A") {
                 videogames = videogames.sort((a, b) => { 
-                    if (a.name < b.name) {
+                    if (a.name.toLowerCase() < b.name.toLowerCase()) {
                         return 1;
                     }
-                    if (a.name > b.name) {
+                    if (a.name.toLowerCase() > b.name.toLowerCase()) {
                         return -1;
                     }
                     return 0;
                 })
             }
-            else if (state.OrderBy === "Rating 1-5") {
+            else if (state.OrderBy === "Rating 0-5") {
                 videogames = videogames.sort((a, b) => {
                     return parseInt(a.rating) - parseInt(b.rating)
                     });
                 }
-            else if (state.OrderBy === "Rating 5-1") {
+            else if (state.OrderBy === "Rating 5-0") {
                 videogames = videogames.sort((a, b) => {
                     return parseInt(b.rating) - parseInt(a.rating)
                     });
@@ -81,9 +81,12 @@ const rootReducer = (state = initialState, action) => {
                 videogames = videogames.filter((game) => {
                     return game.created === false})
             }
-            if (state.FilteredByGenre.length > 0) {
+            if (state.FilteredByGenre !== "Filter by genre") {
                 videogames = videogames.filter((game) => {
-                    return game.genres.some((genre) => state.FilteredByGenre.includes(genre.name))
+                    return game.genres.some((genre) => {
+                       return genre === state.FilteredByGenre
+                    })
+
                 })
             }
 

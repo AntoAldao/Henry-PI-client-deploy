@@ -1,20 +1,23 @@
 import GameCard from "../../components/GameCard/GameCard";
 import React, { useEffect } from "react";
 import ButtonCreate from "../../components/NavBar/ButtonCreate";
-import { useState } from "react";
 import style from "./Home.module.css"
 import { useSelector } from "react-redux";
 import FilterByCreatedOrApi from "../../components/NavBar/FilterByCreated";
 import FilterByGenre from "../../components/NavBar/FilterByGenre";
 import { useDispatch } from "react-redux";
 import {setVideogames, setPage } from "../../redux/actions/index";
+import Order  from "../../components/NavBar/Order"
 
 
 const Home = () => {
     const pages = []
     const videogames = useSelector((state) => state.videogames);
+
     const page = useSelector((state) => state.page);
     const FilteredByCreatedOrApi = useSelector((state) => state.FilteredByCreatedOrApi);
+    const FilteredByGenre = useSelector((state) => state.FilteredByGenre);
+    const OrderBy = useSelector((state) => state.OrderBy);
 
     //PAGES
     for(let i = 1; i <= Math.ceil(videogames.length/15); i++){
@@ -35,9 +38,7 @@ const Home = () => {
     }, [])
     useEffect(() => {
         dispatch(setVideogames());
-    }, [FilteredByCreatedOrApi])
-
-
+    }, [FilteredByCreatedOrApi,FilteredByGenre,OrderBy])
     return (
         <div>
             <h1>Home</h1>
@@ -47,6 +48,8 @@ const Home = () => {
             })}
             <FilterByCreatedOrApi />
             <FilterByGenre />
+            <Order />
+
             <div className={style.card}>
                 
                 {videogames?.slice((page-1)*15, page*15).map((game, index) => {
