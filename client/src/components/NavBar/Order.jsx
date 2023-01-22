@@ -17,7 +17,7 @@ const Order = () => {
     return (
         <div>
             <select name="order" value={OrderBy} onChange={handleChange}>
-                <option value="">{OrderBy}</option>
+                <option value="">Order by ...</option>
                 {orders.map((o) => {
                     return <option value={o} key={o}>{o}</option>
                 })}

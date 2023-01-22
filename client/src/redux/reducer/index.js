@@ -17,7 +17,7 @@ const initialState = {
     videogames : [],
     genres : [],
     OrderBy : "Order by ... ",
-    FilteredByGenre : "Filter by genre", 
+    FilteredByGenre : "", 
     FilteredByCreatedOrApi : "Filter by ... ",
     platforms : ["PC","PlayStation 5","Xbox One","PlayStation 4","Xbox Series S/X",
                             "Nintendo Switch","iOS","Android","Nintendo 3DS","Nintendo DS",
@@ -38,7 +38,7 @@ const rootReducer = (state = initialState, action) => {
                 allVideogames : action.payload,
             } 
         case SET_VIDEOGAMES:
-            let videogames = action.payload;
+            let videogames = [...state.allVideogames];
             if (state.OrderBy === "Name A-Z") {
                 videogames = videogames.sort((a, b) => { 
                     if (a.name.toLowerCase() > b.name.toLowerCase()) {
@@ -63,12 +63,30 @@ const rootReducer = (state = initialState, action) => {
             }
             else if (state.OrderBy === "Rating 0-5") {
                 videogames = videogames.sort((a, b) => {
-                    return parseInt(a.rating) - parseInt(b.rating)
+                    if (a.rating === "Not rated" && b.rating !== "Not rated") {
+                        return 1;
+                    }
+                    if (a.rating !== "Not rated" && b.rating === "Not rated") {
+                        return -1;
+                    }
+                    if (a.rating === "Not rated" && b.rating === "Not rated") {
+                        return 0;
+                    }
+                    return parseFloat(a.rating) - parseFloat(b.rating)
                     });
                 }
             else if (state.OrderBy === "Rating 5-0") {
                 videogames = videogames.sort((a, b) => {
-                    return parseInt(b.rating) - parseInt(a.rating)
+                    if (a.rating === "Not rated" && b.rating !== "Not rated") {
+                        return 1;
+                    }
+                    if (a.rating !== "Not rated" && b.rating === "Not rated") {
+                        return -1;
+                    }
+                    if (a.rating === "Not rated" && b.rating === "Not rated") {
+                        return 0;
+                    }
+                    return parseFloat(b.rating) - parseFloat(a.rating)
                     });
             }
 
@@ -81,7 +99,7 @@ const rootReducer = (state = initialState, action) => {
                 videogames = videogames.filter((game) => {
                     return game.created === false})
             }
-            if (state.FilteredByGenre !== "Filter by genre") {
+            if (state.FilteredByGenre !== "") {
                 videogames = videogames.filter((game) => {
                     return game.genres.some((genre) => {
                        return genre === state.FilteredByGenre
@@ -105,11 +123,6 @@ const rootReducer = (state = initialState, action) => {
                 genres : action.payload
             }
         // case PUT_VIDEOGAME:
-        //     return {
-        //         ...state,
-        //         allVideogames : action.payload
-        //     }
-        // case DELETE_VIDEOGAME:
         //     return {
         //         ...state,
         //         allVideogames : action.payload

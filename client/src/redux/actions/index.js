@@ -24,12 +24,9 @@ export const getVideogames = () => async (dispatch) => {
 };
 
 export const setVideogames = () => async (dispatch) => {
-    const response = await axios.get('http://localhost:3001/api/videogames')
-    const data = response.data;
     return (
         dispatch({
             type: SET_VIDEOGAMES,
-            payload: data
         })
     )
 };
@@ -71,16 +68,6 @@ export const putVideogame = (payload) => async (dispatch) => {
     )
 }
 
-export const deleteVideogame = (id) => async (dispatch) => {
-    const response = await axios.delete(`http://localhost:3001/api/videogame/${id}`)
-    const data = response.data;
-    return (
-        dispatch({
-            type: PUT_VIDEOGAME,
-            payload: data
-        })
-    )
-}
 
 export const filterByGenre = (genre) => async (dispatch) => {
     return (

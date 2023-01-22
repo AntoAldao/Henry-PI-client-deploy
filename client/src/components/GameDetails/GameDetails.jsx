@@ -43,7 +43,6 @@ const GameDetails = (props) => {
         </div>
         {console.log(props.created)}
         {props.created && <div className={style.created}>
-            <button>Delete</button>
             <button>Edit</button>
         </div>}
     </div>

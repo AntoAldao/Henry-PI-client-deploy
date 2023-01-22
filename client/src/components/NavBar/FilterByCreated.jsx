@@ -19,7 +19,7 @@ const FilterByCreatedOrApi = () => {
     return (
         <div >
             <select name="filter" value={filter} onChange={handleChange}>
-            <option value="">{filter}</option>
+            <option value="">Filter by ... </option>
                 {filters.map((filter) => {
                     return <option value={filter} key={filter}>{filter}</option>
                 }

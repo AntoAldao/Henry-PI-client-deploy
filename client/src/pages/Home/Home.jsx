@@ -8,10 +8,12 @@ import FilterByGenre from "../../components/NavBar/FilterByGenre";
 import { useDispatch } from "react-redux";
 import {setVideogames, setPage } from "../../redux/actions/index";
 import Order  from "../../components/NavBar/Order"
+import Search from "../../components/NavBar/Search";
 
 
 const Home = () => {
     const pages = []
+    const allVideogames = useSelector((state) => state.allVideogames);
     const videogames = useSelector((state) => state.videogames);
 
     const page = useSelector((state) => state.page);
@@ -35,7 +37,7 @@ const Home = () => {
     //GET GAMES
     useEffect(() => {
         dispatch(setVideogames());
-    }, [])
+    }, [allVideogames])
     useEffect(() => {
         dispatch(setVideogames());
     }, [FilteredByCreatedOrApi,FilteredByGenre,OrderBy])
@@ -49,6 +51,7 @@ const Home = () => {
             <FilterByCreatedOrApi />
             <FilterByGenre />
             <Order />
+            <Search />
 
             <div className={style.card}>
                 
@@ -60,6 +63,7 @@ const Home = () => {
                             genres={game.genres}
                             id={game.id}
                             key={index}
+                            created = {game.created}
                         />
                     )
 

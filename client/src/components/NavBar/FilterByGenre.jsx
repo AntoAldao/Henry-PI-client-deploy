@@ -15,7 +15,7 @@ const FilterByGenre = () => {
     return (
         <div >
             <select name="filter" value={FilteredByGenre} onChange={handleChange}>
-                <option value="">{FilteredByGenre}</option>
+                <option value="">Filter by genre</option>
                 {genres.map((genre) => {
                     return <option value={genre.name} key={genre.id}>{genre.name}</option>
                 }
