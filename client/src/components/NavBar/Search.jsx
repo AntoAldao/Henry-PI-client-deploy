@@ -9,6 +9,7 @@ const Search = () => {
     const handleChange = (e) => {
         setName(e.target.value);
         if (e.target.value === "") {
+            setName("");
             dispatch(setVideogames());
             dispatch(setPage(1));
         }

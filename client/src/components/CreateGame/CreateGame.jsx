@@ -13,14 +13,16 @@ import { getVideogames } from "../../redux/actions/index"
 
 const CreateGame = () => {
     const dispatch = useDispatch()
+    const genres = useSelector((state) => state.genres)
+    const platforms = useSelector((state) => state.platforms)
 
     const [game, setGame] = useState({
         name: "",
-        image: "https://images.unsplash.com/photo-1593277992013-05e17a5f417d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY3Mzg5OTgyMg&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
+        image: "",
         description: "",
         genres: [],
         platforms: [],
-        rating: "",
+        rating:"",
         released: ""
     })
 
@@ -58,8 +60,17 @@ const CreateGame = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
         if(Object.keys(errors).length === 0){
+            const body = {...game}
+            if (game.image === "") {
+                delete body.image
+            }
+            if (game.rating === "") {
+                delete body.rating
+            }
+            console.log(body)
             try {
-                const response = await axios.post('http://localhost:3001/api/videogames', game)
+                console.log(game)
+                const response = await axios.post('http://localhost:3001/api/videogames', body)
                  setGame({
                      name: "",
                      image: "",
@@ -78,6 +89,7 @@ const CreateGame = () => {
                      rating: "",
                      released: ""
                  })
+                 setGenresElected([])
                 alert(response.data)
                 dispatch(getVideogames())
                 
@@ -88,39 +100,77 @@ const CreateGame = () => {
 
 
     }
+    const [genresElected, setGenresElected] = useState([])
 
     const handleSelectGenres= (e) => {
-        const currentGenres = []
-        e.map((genre) => {
-            currentGenres.push(genre.value)
+        if (!game.genres.includes(e.target.value)) {
+            const genresState = game.genres
+            const Elected = genresElected
+            genresState.push(e.target.value)
+            const genre = genres.filter(genre => genre.id == e.target.value)
+            Elected.push(genre[0].name)
+ 
+            setGenresElected(Elected)
+            setGame({
+                ...game,
+                genres: genresState
+            })
+            setErrors(validate({
+                ...game,
+                genres: genresState
+            }))
         }
-        )
+        else{
+            const genresState = game.genres
+            const Elected = genresElected
+            const genre = genres.filter(genre => genre.id == e.target.value)
+            const index = genresState.indexOf(e.target.value)
+            genresState.splice(index, 1)
+            const indexElected = Elected.indexOf(genre[0].name)
+            Elected.splice(indexElected, 1)
+            setGenresElected(Elected)
+            setGame({
+                ...game,
+                genres: genresState
+            })
+            setErrors(validate({
+                ...game,
+                genres: genresState
+            }))
+        }
+    }
+    
+
+    const handleSelectPlatforms= (e) => {
+        const platformsState = game.platforms
+        if (!platformsState.includes(e.target.value)) {
+            platformsState.push(e.target.value)
+
+        }
+        else{
+
+            const index = platformsState.indexOf(e.target.value)
+            platformsState.splice(index, 1)
+        }
         setGame({
             ...game,
-            genres: currentGenres
+            platforms: platformsState
         })
         setErrors(validate({
             ...game,
-            genres: currentGenres
+            platforms: platformsState
         }))
         
     }
 
-    const handleSelectPlatforms= (e) => {
-        const currentPlatforms = []
-        e.map((platform) => {
-            currentPlatforms.push(platform.value)
-        }
-        )
-        setGame({
-            ...game,
-            platforms: currentPlatforms
-        })
-        setErrors(validate({
-            ...game,
-            platforms: currentPlatforms
-        }))
-        
+    const [showGenres, setShowGenres] = useState(false)
+    const [showPlatforms, setShowPlatforms] = useState(false)
+    
+    const handleShowGenres = () => {
+        setShowGenres(!showGenres)
+    }
+    const handleShowPlatforms = () => {
+        setShowPlatforms(!showPlatforms)
     }
 
     useEffect(() => {
@@ -128,11 +178,12 @@ const CreateGame = () => {
     }, [errors])
 
     
-    const genres = useSelector((state) => state.genres)
-    const platforms = useSelector((state) => state.platforms)
+    
+   
+ 
+
     return (
         <div>
-            {console.log(game)}
             <h1>Create Game</h1>
             <form onSubmit={handleSubmit}  className={style.form} >
                 <div>
@@ -167,23 +218,37 @@ const CreateGame = () => {
 
                 <div>
                     <label>Genres</label>
-                    <Select 
-                        isMulti
-                        options={genres.map((genre) => {
-                            return {value: genre.id, label: genre.name}})}
-                        name="genres"
-                        onChange={handleSelectGenres}/>
+                    <input type="text" name="genres" value = {genresElected} readOnly={true}/>
+                    <button onClick={handleShowGenres}>Genres</button>
+                    {showGenres? <div>
+                        <select 
+                            name="genres"
+                            multiple={true}    
+                            onChange={handleSelectGenres}
+                            value = {game.genres}>
+                            {genres.map((genre) => {
+                                return <option value={genre.id} key={genre.id}>{genre.name}</option>
+                            })}
+                        </select>
+                    </div>:null}
                     {errors.genres ? <p>{errors.genres}</p>:null}
                 </div>
 
                 <div>
                     <label>Platforms</label>
-                    <Select 
-                        isMulti
-                        options={platforms.map((platform) => {
-                            return {value: platform, label: platform}})}
-                        name="platforms"
-                        onChange={handleSelectPlatforms}/>
+                    <input type="text" name="platform" value = {game.platforms} readOnly={true}/>
+                    <button onClick={handleShowPlatforms}>Platforms</button>
+                        {showPlatforms? <div>
+                        <select 
+                            name="platforms"
+                            multiple={true}    
+                            onChange={handleSelectPlatforms}
+                            value = {game.platforms}>
+                            {platforms.map((platform,index) => {
+                                return <option value={platform} key={index}>{platform}</option>
+                            })}
+                        </select>
+                    </div>:null}
                     {errors.platforms ? <p>{errors.platforms}</p>:null}
                 </div>
 
@@ -207,7 +272,6 @@ const CreateGame = () => {
                         onChange={handleChange}/>
                     {errors.released ? <p>{errors.released}</p>:null}
                 </div>
-                {console.log(disabled)}
                 <button type="submit" disabled = {disabled}>Create</button>
             </form>
             <Link to={"/home"}>
