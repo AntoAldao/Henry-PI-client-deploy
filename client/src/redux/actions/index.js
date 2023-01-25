@@ -32,9 +32,16 @@ export const setVideogames = () => async (dispatch) => {
 };
 
 export const getVideogamesByName = (name) => async (dispatch) => {
+    let data = ""
+    try {
+        const response = await axios.get(`http://localhost:3001/api/videogames?name=${name}`)
+        data = response.data;
+        console.log(data)
+    } catch (error) {
+       
+        data = error.response.data
+    }
     
-    const response = await axios.get(`http://localhost:3001/api/videogames?name=${name}`)
-    const data = response.data;
     return (
         dispatch({
             type: GET_VIDEOGAMES_BY_NAME,

@@ -1,35 +1,11 @@
 import style from "./GameDetails.module.css";
-import {useEffect, useState} from "react";
+import { useState} from "react";
 
 const GameDetails = (props) => {   
-    
-    const [edit, setEdit] = useState(false);
-    const [game, setGame] = useState({
-        name: props.name,
-        description: props.description,
-        date: props.date,
-        rating: props.rating,
-        platforms: props.platforms,
-        image: props.image,
-        genres: props.genres
-    })
-    const [errors, setErrors] = useState({
-        name: "",
-        image: "",
-        description: "",
-        genres: "",
-        platforms: "",
-        rating: "",
-        date: ""
-    })
-    
-    const handleEdit = () => {
-        setEdit(!edit);
-    }
-    
 
     return (
     <div className={style.card}>
+        <h1>{props.name}</h1>
         <img src={props.image} alt={props.name} className={style.image}/>
         <div dangerouslySetInnerHTML={{__html:props.description}}/> 
         <div className={style.info}>
@@ -68,17 +44,12 @@ const GameDetails = (props) => {
             </div>
         
         </div>
-        {props.created && <div className={style.created}>
-            <button onClick={handleEdit}>Edit</button>
-        </div>}
-        {edit? <div>
-            {/* name,
-            description,
-            date,
-            rating,
-            platforms,
-            image */}
-        </div> : null}
+        { props.created?
+            <div className={style.created}>
+                        <button onClick={props.handleEdit}>Edit</button>
+            </div>
+            : null
+        }
     </div>
     )
 }

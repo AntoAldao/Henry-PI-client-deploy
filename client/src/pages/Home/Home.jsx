@@ -37,6 +37,9 @@ const Home = () => {
     //GET GAMES
     useEffect(() => {
         dispatch(setVideogames());
+        if (page > Math.ceil(videogames.length/15)) {
+            dispatch(setPage(Math.ceil(videogames.length/15)))
+        }
     }, [allVideogames])
     useEffect(() => {
         dispatch(setVideogames());
@@ -54,8 +57,9 @@ const Home = () => {
             <Search />
 
             <div className={style.card}>
-                
-                {videogames?.slice((page-1)*15, page*15).map((game, index) => {
+                {videogames === 'No se encontraron videojuegos' ? 
+                <h1>No se encontraron videojuegos</h1>            
+                : videogames?.slice((page-1)*15, page*15).map((game, index) => {
                     return(
                         <GameCard
                             name={game.name}

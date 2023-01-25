@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import validate from "./validate"
-import Select from 'react-select'
 import { useSelector } from "react-redux"
 import style from "./CreateGame.module.css"
 import { useEffect } from "react"
@@ -15,6 +14,7 @@ const CreateGame = () => {
     const dispatch = useDispatch()
     const genres = useSelector((state) => state.genres)
     const platforms = useSelector((state) => state.platforms)
+    const [disabled, setDisabled] = useState(true)
 
     const [game, setGame] = useState({
         name: "",
@@ -36,7 +36,6 @@ const CreateGame = () => {
         released: ""
     })
       
-    const [disabled, setDisabled] = useState(true)
 
     const handleDisable = () => {
         if(Object.keys(errors).length === 0){
@@ -103,55 +102,42 @@ const CreateGame = () => {
     const [genresElected, setGenresElected] = useState([])
 
     const handleSelectGenres= (e) => {
+        const genresState = game.genres
+        const Elected = genresElected
+        const genre = genres.filter(genre => genre.id == e.target.value)
+
         if (!game.genres.includes(e.target.value)) {
-            const genresState = game.genres
-            const Elected = genresElected
             genresState.push(e.target.value)
-            const genre = genres.filter(genre => genre.id == e.target.value)
             Elected.push(genre[0].name)
- 
-            setGenresElected(Elected)
-            setGame({
-                ...game,
-                genres: genresState
-            })
-            setErrors(validate({
-                ...game,
-                genres: genresState
-            }))
-        }
-        else{
-            const genresState = game.genres
-            const Elected = genresElected
-            const genre = genres.filter(genre => genre.id == e.target.value)
+        }else{
             const index = genresState.indexOf(e.target.value)
             genresState.splice(index, 1)
             const indexElected = Elected.indexOf(genre[0].name)
             Elected.splice(indexElected, 1)
-            setGenresElected(Elected)
-            setGame({
-                ...game,
-                genres: genresState
-            })
-            setErrors(validate({
-                ...game,
-                genres: genresState
-            }))
+            
         }
+        setGenresElected(Elected) 
+        setGame({
+            ...game,
+            genres: genresState
+        })
+        setErrors(validate({
+            ...game,
+            genres: genresState
+        }))
     }
     
 
     const handleSelectPlatforms= (e) => {
         const platformsState = game.platforms
+
         if (!platformsState.includes(e.target.value)) {
             platformsState.push(e.target.value)
-
-        }
-        else{
-
+        }else{
             const index = platformsState.indexOf(e.target.value)
             platformsState.splice(index, 1)
         }
+
         setGame({
             ...game,
             platforms: platformsState
@@ -184,6 +170,7 @@ const CreateGame = () => {
 
     return (
         <div>
+            {console.log(game)}
             <h1>Create Game</h1>
             <form onSubmit={handleSubmit}  className={style.form} >
                 <div>

@@ -62,7 +62,7 @@ const getVideogames = async (req, res) => {
                     }
                     res.status(200).send(allVideoGames);
                 } else {
-                   throw new Error('No se encontraron videojuegos'); // si no hay juegos que coincidan con la query, devuelvo un mensaje
+                    res.status(404).send('No se encontraron videojuegos'); // si no hay juegos que coincidan con la query, devuelvo un mensaje
                 }
             }else{
                 res.status(200).send(allVideoGames); // si no hay query, devuelvo todos los juegos
@@ -70,8 +70,7 @@ const getVideogames = async (req, res) => {
         })
 
     } catch (error) {
-        if (error.mesaage === 'No se encontraron videojuegos') res.status(404).send(error.mesaage);
-        else{res.status(400).send(error.mesaage);}
+        {res.status(400).send(error.message);}
     }    
 
 
