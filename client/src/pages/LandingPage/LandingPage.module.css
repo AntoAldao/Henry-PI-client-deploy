@@ -1,0 +1,74 @@
+.divContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("../../assets/fondolanding3.jpg");
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+
+}
+.title{
+    font-family: "Press Start 2P";
+    font-size: 3rem;
+    text-shadow: 3px 3px 0 rgb(120, 120, 120), -1px -1px 0 rgb(120, 120, 120), 1px -1px 0 rgb(120, 120, 120), -1px 1px 0 rgb(120, 120, 120), 1px 1px 0 rgb(120, 120, 120);
+
+}
+.buttonStart{
+    font-family: "Press Start 2P";
+    font-size: 1rem;
+    border: none;
+    background: none;
+    color: rgb(247, 245, 155);
+    
+}
+
+.buttonStart:focus span{
+    animation-name: parpadeo;
+    animation-duration: 0.3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -webkit-animation-name: parpadeo;
+    -webkit-animation-duration: 0.3s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+.buttonStart:focus{
+    outline: none;
+}
+
+.start{
+    font-family: "Press Start 2P";
+    /* text-shadow: 3px 3px 0 rgb(120, 120, 120), -1px -1px 0 rgb(120, 120, 120), 1px -1px 0 rgb(120, 120, 120), -1px 1px 0 rgb(120, 120, 120), 1px 1px 0 rgb(120, 120, 120); */
+    font-size: 4rem;
+    animation-name: parpadeo;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -webkit-animation-name: parpadeo;
+    -webkit-animation-duration: 2.5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f00), to(rgb(236, 221, 11)));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+
+}
+@keyframes parpadeo {
+    0% { opacity: 0.0; }
+    50% { opacity: 1.0; }
+    100% { opacity: 0.0; }
+}
+
+@-webkit-keyframes parpadeo {
+    0% { opacity: 0.0; }
+    50% { opacity: 1.0; }
+    100% { opacity: 0.0; }
+}

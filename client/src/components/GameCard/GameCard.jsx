@@ -15,15 +15,19 @@ const GameCard = (props) => {
     return (
         <div className={style.card}> 
             <Link to={`/videogame/${props.id}`}>
-                <button className={style.name}><h1>{props.name}</h1></button>
+                <button className={style.buttonname}>
+                    <h1 className={style.name}>{props.name}</h1>
+                </button>
             </Link>
-             <div >
+             <div className={style.genres}>
                 <h3> Genres</h3>
                 <ul className={style.list}>
                     {props.genres?.map((genre, index) => {
                         return <li key={index}>{genre}</li>
                     })}
                 </ul>
+            </div>
+            <div>
                 <img src={props.image} alt={props.name} className = {style.image}/>
                 
                 {props.created?

@@ -2,6 +2,10 @@ function isUrl(s) {
     var regexp = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g;
     return regexp.test(s);
 }
+function isDate(s) {
+    var regexp = /(\d{4})-(\d{2})-(\d{2})/g;
+    return regexp.test(s);
+}
 const  validate = (game) => {
     console.log(game.image)
     const errors = {}
@@ -29,6 +33,10 @@ const  validate = (game) => {
     else if (!game.released ) {
         errors.released = "Release date is required"
     }
+    else if (!isDate(game.released) && game.released !== "") {
+        errors.released = "Release date must be a valid date (YYYY-MM-DD)"
+    }
+
     
     
     return errors

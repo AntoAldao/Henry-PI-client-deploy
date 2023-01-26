@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { getVideogames, getGenres , setVideogames} from "../../redux/actions/index";
+import style from "./LandingPage.module.css"
 
 const LandingPage = () => {
     const dispatch = useDispatch(); 
@@ -12,10 +13,13 @@ const LandingPage = () => {
     }, [])
 
     return (
-        <div>
-            <h1>VIDEOGAMES</h1>
+        <div className={style.divContainer}>
+            <h1 className={style.title} >VIDEOGAMES</h1>
+            <h1 className={style.start}>PRESS START</h1>
             <Link to="/home">
-                <button>Home</button>
+                <button className={style.buttonStart} autoFocus>
+                    <span>›</span> START
+                </button>
             </Link>
         </div>
     );

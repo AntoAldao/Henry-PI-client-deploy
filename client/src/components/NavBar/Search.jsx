@@ -2,7 +2,7 @@ import {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import {getVideogamesByName, setVideogames,setPage} from '../../redux/actions/index';
 
-const Search = () => {
+const Search = (props) => {
     const dispatch = useDispatch();
     const [name, setName] = useState("");
 
@@ -18,6 +18,7 @@ const Search = () => {
         e.preventDefault();
         dispatch(getVideogamesByName(name));
         dispatch(setPage(1));
+        props.setLoading(true)
     }
 
     return (

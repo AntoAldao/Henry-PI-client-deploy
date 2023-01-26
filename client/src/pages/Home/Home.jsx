@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import {setVideogames, setPage } from "../../redux/actions/index";
 import Order  from "../../components/NavBar/Order"
 import Search from "../../components/NavBar/Search";
+import pacman from "../../assets/pacman2.svg"
 
 
 const Home = () => {
@@ -20,6 +21,8 @@ const Home = () => {
     const FilteredByCreatedOrApi = useSelector((state) => state.FilteredByCreatedOrApi);
     const FilteredByGenre = useSelector((state) => state.FilteredByGenre);
     const OrderBy = useSelector((state) => state.OrderBy);
+
+    const [loading, setLoading] = React.useState(true);
 
     //PAGES
     for(let i = 1; i <= Math.ceil(videogames.length/15); i++){
@@ -37,42 +40,66 @@ const Home = () => {
     //GET GAMES
     useEffect(() => {
         dispatch(setVideogames());
-        if (page > Math.ceil(videogames.length/15)) {
+        if (page > Math.ceil(videogames.length/15) && page !== 1) {
             dispatch(setPage(Math.ceil(videogames.length/15)))
         }
     }, [allVideogames])
+
     useEffect(() => {
         dispatch(setVideogames());
     }, [FilteredByCreatedOrApi,FilteredByGenre,OrderBy])
+
+    useEffect(() => {
+        if (typeof videogames === "object") {
+            if (videogames.length > 0) {
+                setLoading(false)
+            }
+            else{
+                setLoading(true)
+            }
+        }
+        else{
+            setLoading(false)
+        }
+    }, [videogames])
     return (
         <div>
-            <h1>Home</h1>
-            <ButtonCreate />
-            {pages?.map((page, index) => {
-                return <button key={index} onClick = {handlePage}>{page}</button>
-            })}
-            <FilterByCreatedOrApi />
-            <FilterByGenre />
-            <Order />
-            <Search />
+            {!loading?
+                <div>
+                    <h1>Home</h1>
+                    <Search 
+                        loading = {setLoading}
+                    />
+                    <ButtonCreate />
+                    {pages?.map((page, index) => {
+                        return <button key={index} onClick = {handlePage}>{page}</button>
+                    })}
+                    <FilterByCreatedOrApi />
+                    <FilterByGenre />
+                    <Order />
 
-            <div className={style.card}>
-                {videogames === 'No se encontraron videojuegos' ? 
-                <h1>No se encontraron videojuegos</h1>            
-                : videogames?.slice((page-1)*15, page*15).map((game, index) => {
-                    return(
-                        <GameCard
-                            name={game.name}
-                            image={game.image}
-                            genres={game.genres}
-                            id={game.id}
-                            key={index}
-                            created = {game.created}
-                        />
-                    )
+                    <div className={style.card}>
+                        {videogames === 'No se encontraron videojuegos' ? 
+                        <h1>No se encontraron videojuegos</h1>            
+                        : videogames?.slice((page-1)*15, page*15).map((game, index) => {
+                            return(
+                                <GameCard
+                                    name={game.name}
+                                    image={game.image}
+                                    genres={game.genres}
+                                    id={game.id}
+                                    key={index}
+                                    created = {game.created}
+                                />
+                            )
 
-                })}
-            </div>
+                        })}
+                    </div>
+                </div>
+                :  
+                <div className={style.divloading}>
+                </div>
+            }
         </div>
     );
 }
