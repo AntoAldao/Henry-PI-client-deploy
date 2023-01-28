@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
 }
 .card{
     width: 70%;
@@ -35,15 +35,6 @@
 .divimage{
     width: 450px;
     /* position: relative; */
-}
-.genres, .platforms, .rating, .released{
-    /* font-family: "Press Start 2P"; */
-    font-size: 15px;
-    font-weight: 500;
-    color: rgb(0, 0, 0);
-    padding: 5px;
-    margin: 5px;
-    /* text-shadow:2px 2px 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0), 1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0), 1px 1px 0 rgb(0, 0, 0); */
 }
 .list{
     list-style: none;

@@ -15,15 +15,9 @@ const GameCard = (props) => {
     return (
         <div className={style.card}> 
             <img src={props.image} alt={props.name} className = {style.image}/>
-            {/* <div style={{position:"relative"}}>
-                <div className={style.imagediv}>
-                </div>
-                    
-                </div> */}
             <div className={style.cardinfo}>
                 <h1 className={style.name}>{props.name}</h1>
                 <div className={style.genres}>
-                    {/* <h3> Genres</h3> */}
                     <ul className={style.list}>
                         {props.genres?.map((genre, index) => {
                             return <li key={index}>{genre}</li>
@@ -35,13 +29,11 @@ const GameCard = (props) => {
                         </button>
                     </Link>
                 </div>   
-            </div>
-            <div>
-                {props.created?
-                    <div>
-                        <button onClick={deleteGame}>Delete</button>
-                    </div> : null}
             </div> 
+            {props.created?
+            <div className={style.divdelete}>
+                <button onClick={deleteGame}>X</button>
+            </div> : null}
         </div>  
     )
 };

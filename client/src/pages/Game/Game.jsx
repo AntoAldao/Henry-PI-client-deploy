@@ -19,11 +19,13 @@ const Game = () => {
     const save = () => {
         setChages(!chages)
     }
+    const [loading, setLoading] = useState(true)
     
     useEffect(() => {
         fetch(`http://localhost:3001/api/videogames/${id}`)
         .then(response => response.json())
         .then(data => setGame(data))
+        .then(() => setLoading(false))
     }, [])
 
     useEffect(() => {
@@ -31,43 +33,48 @@ const Game = () => {
         .then(response => response.json())
         .then(data => setGame(data))
     }, [chages])
-
     
     return(
-        <div className={style.cardDetail}> 
-            {edit ? 
-            <EditGame
-                name={game.name}
-                image={game.image}
-                description={game.description}
-                genres={game.genres}
-                platforms={game.platforms}
-                rating={game.rating}
-                date={game.date}
-                id={game.id}
-                created = {game.created}
-                handleEdit={handleEdit}
-                save={save}
-            />
-            : 
-            <GameDetails
-                name={game.name}
-                image={game.image}
-                description={game.description}
-                genres={game.genres}
-                platforms={game.platforms}
-                rating={game.rating}
-                date={game.date}
-                id={game.id}
-                created = {game.created}
-                handleEdit={handleEdit}
-            />
-            }
-            
-            <Link to={`/home`}>
-                <button> back </button>
-            </Link>   {/* link to the detail of the game */}
-        </div>  
+        <div className={style.generaldiv}>
+            {loading? 
+                <div className={style.divloading}></div> :
+                <div className={style.cardDetail} style = {{height:`${loading? "100vh":"auto"}`}}> 
+                {edit ? 
+                <EditGame
+                    name={game.name}
+                    image={game.image}
+                    description={game.description}
+                    genres={game.genres}
+                    platforms={game.platforms}
+                    rating={game.rating}
+                    date={game.date}
+                    id={game.id}
+                    created = {game.created}
+                    handleEdit={handleEdit}
+                    save={save}
+                />
+                : 
+                <GameDetails
+                    name={game.name}
+                    image={game.image}
+                    description={game.description}
+                    genres={game.genres}
+                    platforms={game.platforms}
+                    rating={game.rating}
+                    date={game.date}
+                    id={game.id}
+                    created = {game.created}
+                    handleEdit={handleEdit}
+                />
+                }
+                
+                <Link to={`/home`}>
+                    <button> back </button>
+                </Link>   {/* link to the detail of the game */}
+            </div>  
+        }
+        </div>
+        
     )
 }
 export default Game
