@@ -58,113 +58,109 @@ const GameDetails = (props) => {
         }
     },[selectedRef])
     
-    return (    
+    return (  
+        <div className={style.divpantalla}>
         <div className={style.general}>
+        {!showInfo? 
             <div className={style.card}>
+
                 <div className={style.imyname}>
-                    <div className={style.divimage}>
-                        <img src={props.image} alt={props.name} className={style.image}/>
-                    </div>
-                    <h1 className={style.name}>{props.name}</h1>
-                    
+                    <img src={props.image} alt={props.name} className={style.image}/>
+                    <h1 className={style.name}>{props.name}</h1>   
                 </div>
-                {!showInfo? 
-                    <ul className={style.buttonsinfo} onKeyDown={navigateMenu}> 
-                        <li className={style.liinfo}>
-                            <button value ="Description" onClick={handleShow} autoFocus className={style.binfo}  ref={descriptionRef} >
-                                <span>
-                                    ›
-                                </span>
-                            </button>
-                            <span >Descripion</span>
-                        </li>
-                        <li className={style.liinfo}>
-                            <button value ="Genres" onClick={handleShow} className={style.binfo} ref={genresRef}  >
-                                <span>
-                                    ›
-                                </span>
-                            </button>
-                            <span >Genres</span>
-                        </li >
-                        <li className={style.liinfo}>
-                            <button value ="Platforms" onClick={handleShow} className={style.binfo} ref={platformsRef}  >
-                                <span>
-                                    ›
-                                </span>
-                            </button>
-                            <span >Platforms</span>
-                        </li>
-                        <li className={style.liinfo}>
-                            <button value ="Rating" onClick={handleShow} className={style.binfo} ref={ratingRef} >
-                                <span>
-                                    ›
-                                </span>
-                            </button>
-                            <span >Rating</span>
-                        </li>
-                        <li className={style.liinfo}>
-                            <button value = "Released" onClick={handleShow} className={style.binfo} ref={releasedRef}  >
-                                <span>
-                                    ›
-                                </span>
-                            </button>
-                            <span >Released</span>
-                        </li>
-                    </ul>
-                    : 
-                    <div>
-                        {show === "Description" && 
-                            <div dangerouslySetInnerHTML={{__html:props.description}} className={style.description}/>
-                        }
-                        {show === "Genres" &&
-                            <div className={style.genres}>
-                                <h2> Genres</h2>
-                                <ul className={style.list}>
-                                    {props.genres?.map((genre, index) => {
-                                        return(
-                                            <li key={index}>{genre}</li>
-                                        )
-                                    })}
-        
-                                </ul>
-                            </div>
-                        }
-                        {show === "Platforms" &&
-                        <div className={style.platforms}>
-                            <h2> Platforms</h2>
-                            <ul className={style.list}>
-                                {props.platforms?.map((platform, index) => {
-                                    return(
-                                        <li key={index}>{platform}</li>
-                                    )
-                                })}
-                        </ul>
-                        </div>
-                        }
-                        {show === "Rating" &&
-                            <div className={style.rating}>
-                                <h2> Rating</h2>
-                                <p>{props.rating}</p>
-                            </div>
-                        }
-                        {show === "Released" &&
-                            <div className={style.released}>
-                                <h2> Released</h2>
-                                <p>{props.date}</p>
-                            </div>
-                            }
-                        <button onClick={handleShow}>Close</button>
-                    </div>
-                }
-                { props.created?
-                    <div className={style.created}>
-                                <button onClick={props.handleEdit}>Edit</button>
-                    </div>
-                    : null
-                }
+
+                <ul className={style.buttonsinfo} onKeyDown={navigateMenu}> 
+                    <li className={style.liinfo}>
+                        <button value ="Description" onClick={handleShow} autoFocus className={style.binfo}  ref={descriptionRef} >
+                            <span>
+                                ›
+                            </span>
+                        </button>
+                        <span className={style.titles}>Descripion</span>
+                    </li>
+                    <li className={style.liinfo}>
+                        <button value ="Genres" onClick={handleShow} className={style.binfo} ref={genresRef}  >
+                            <span>
+                                ›
+                            </span>
+                        </button>
+                        <span className={style.titles} >Genres</span>
+                    </li >
+                    <li className={style.liinfo}>
+                        <button value ="Platforms" onClick={handleShow} className={style.binfo} ref={platformsRef}  >
+                            <span>
+                                ›
+                            </span>
+                        </button>
+                        <span className={style.titles} >Platforms</span>
+                    </li>
+                    <li className={style.liinfo}>
+                        <button value ="Rating" onClick={handleShow} className={style.binfo} ref={ratingRef} >
+                            <span>
+                                ›
+                            </span>
+                        </button>
+                        <span className={style.titles}>Rating</span>
+                    </li>
+                    <li className={style.liinfo}>
+                        <button value = "Released" onClick={handleShow} className={style.binfo} ref={releasedRef}  >
+                            <span>
+                                ›
+                            </span>
+                        </button>
+                        <span className={style.titles}>Released</span>
+                    </li>
+                </ul>
             </div>
+            : 
+            // <div>
+            <div className={style.divinfo}>
+                {show === "Description" && 
+                    <div dangerouslySetInnerHTML={{__html:props.description}} className={style.description}/>
+                }
+                {show === "Genres" &&
+                    <div >
+                        <h2> Genres</h2>
+                        <ul className={style.list}>
+                            {props.genres?.map((genre, index) => {
+                                return(
+                                    <li key={index}>{genre}</li>
+                                )
+                            })}
+
+                        </ul>
+                    </div>
+                }
+                {show === "Platforms" &&
+                <div >
+                    <h2> Platforms</h2>
+                    <ul className={style.list}>
+                        {props.platforms?.map((platform, index) => {
+                            return(
+                                <li key={index}>{platform}</li>
+                            )
+                        })}
+                </ul>
+                </div>
+                }
+                {show === "Rating" &&
+                    <div>
+                        <h2> Rating</h2>
+                        <p>{props.rating}</p>
+                    </div>
+                }
+                {show === "Released" &&
+                    <div>
+                        <h2> Released</h2>
+                        <p>{props.date}</p>
+                    </div>
+                    }
+                <button onClick={handleShow} className={style.buttonclose}>Close</button>
+            </div>
+
+        }
         </div>
-        
+        </div>  
     )
 }
 

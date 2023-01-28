@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
 import validate from "./validate"
 import { useSelector } from "react-redux"
 import style from "./CreateGame.module.css"
@@ -15,6 +14,10 @@ const CreateGame = () => {
     const genres = useSelector((state) => state.genres)
     const platforms = useSelector((state) => state.platforms)
     const [disabled, setDisabled] = useState(true)
+    const [genresElected, setGenresElected] = useState([])
+    
+    const [showGenres, setShowGenres] = useState(false)
+    const [showPlatforms, setShowPlatforms] = useState(false)
 
     const [game, setGame] = useState({
         name: "",
@@ -35,7 +38,13 @@ const CreateGame = () => {
         rating: "",
         released: ""
     })
-      
+    
+    const handleShowGenres = () => {
+        setShowGenres(!showGenres)
+    }
+    const handleShowPlatforms = () => {
+        setShowPlatforms(!showPlatforms)
+    }
 
     const handleDisable = () => {
         if(Object.keys(errors).length === 0){
@@ -99,8 +108,7 @@ const CreateGame = () => {
 
 
     }
-    const [genresElected, setGenresElected] = useState([])
-
+    
     const handleSelectGenres= (e) => {
         const genresState = game.genres
         const Elected = genresElected
@@ -149,31 +157,16 @@ const CreateGame = () => {
         
     }
 
-    const [showGenres, setShowGenres] = useState(false)
-    const [showPlatforms, setShowPlatforms] = useState(false)
-    
-    const handleShowGenres = () => {
-        setShowGenres(!showGenres)
-    }
-    const handleShowPlatforms = () => {
-        setShowPlatforms(!showPlatforms)
-    }
-
     useEffect(() => {
         handleDisable()
     }, [errors])
 
-    
-    
-   
- 
 
     return (
         <div>
-            {console.log(game)}
-            <h1>Create Game</h1>
+            <h1 className={style.title}>Create Game</h1>
             <form onSubmit={handleSubmit}  className={style.form} >
-                <div>
+                <div className={style.divinfo}>
                     <label>Name</label>
                     <input 
                         type="text" 
@@ -183,7 +176,7 @@ const CreateGame = () => {
                     {errors.name ? <p>{errors.name}</p>:null}
                 </div>
 
-                <div>
+                <div className={style.divinfo}>
                     <label>Image</label>
                     <input 
                         type="text" 
@@ -193,7 +186,7 @@ const CreateGame = () => {
                     {game.image? <img src={game.image} alt="image" width="100px" height="100px"/>:null}
                 </div>
 
-                <div>
+                <div className={style.divinfo}>
                     <label>Description</label>
                     <input 
                         type="text" 
@@ -203,43 +196,47 @@ const CreateGame = () => {
                     {errors.description ? <p>{errors.description}</p>:null}
                 </div>
 
-                <div>
+                <div className={style.divinfo}>
                     <label>Genres</label>
+                    <div>
                     <input type="text" name="genres" value = {genresElected} readOnly={true}/>
-                    <button onClick={handleShowGenres}>Genres</button>
-                    {showGenres? <div>
-                        <select 
-                            name="genres"
-                            multiple={true}    
-                            onChange={handleSelectGenres}
-                            value = {game.genres}>
-                            {genres.map((genre) => {
-                                return <option value={genre.id} key={genre.id}>{genre.name}</option>
-                            })}
-                        </select>
-                    </div>:null}
+                        <button onClick={handleShowGenres} className={style.flecha}>▾</button>
+                        {showGenres? <div>
+                            <select 
+                                name="genres"
+                                multiple={true}    
+                                onChange={handleSelectGenres}
+                                value = {game.genres}>
+                                {genres.map((genre) => {
+                                    return <option value={genre.id} key={genre.id}>{genre.name}</option>
+                                })}
+                            </select>
+                        </div>:null}
+                    </div>
                     {errors.genres ? <p>{errors.genres}</p>:null}
                 </div>
 
-                <div>
+                <div className={style.divinfo}>
                     <label>Platforms</label>
+                    <div>
                     <input type="text" name="platform" value = {game.platforms} readOnly={true}/>
-                    <button onClick={handleShowPlatforms}>Platforms</button>
-                        {showPlatforms? <div>
-                        <select 
-                            name="platforms"
-                            multiple={true}    
-                            onChange={handleSelectPlatforms}
-                            value = {game.platforms}>
-                            {platforms.map((platform,index) => {
-                                return <option value={platform} key={index}>{platform}</option>
-                            })}
-                        </select>
-                    </div>:null}
+                        <button onClick={handleShowPlatforms} className={style.flecha}>▾</button>
+                            {showPlatforms? <div>
+                            <select 
+                                name="platforms"
+                                multiple={true}    
+                                onChange={handleSelectPlatforms}
+                                value = {game.platforms}>
+                                {platforms.map((platform,index) => {
+                                    return <option value={platform} key={index}>{platform}</option>
+                                })}
+                            </select>
+                        </div>:null}
+                    </div>
                     {errors.platforms ? <p>{errors.platforms}</p>:null}
                 </div>
 
-                <div>
+                <div className={style.divinfo}>
                     <label>Rating</label>
                     <input 
                         type="text" 
@@ -250,7 +247,7 @@ const CreateGame = () => {
 
                 </div>
 
-                <div>
+                <div className={style.divinfo}>
                     <label>Released</label>
                     <input 
                         type="text" 
@@ -259,11 +256,9 @@ const CreateGame = () => {
                         onChange={handleChange}/>
                     {errors.released ? <p>{errors.released}</p>:null}
                 </div>
-                <button type="submit" disabled = {disabled}>Create</button>
+                <button type="submit" disabled = {disabled} className={style.create}>Create</button>
             </form>
-            <Link to={"/home"}>
-                <button>Back</button>
-            </Link>
+
         </div>
     )
 }

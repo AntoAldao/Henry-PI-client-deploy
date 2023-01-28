@@ -39,6 +39,9 @@ const Game = () => {
             {loading? 
                 <div className={style.divloading}></div> :
                 <div className={style.cardDetail} style = {{height:`${loading? "100vh":"auto"}`}}> 
+                 <Link to={`/home`}>
+                    <button className={style.back}> back </button>
+                </Link>   {/* link to the detail of the game */}
                 {edit ? 
                 <EditGame
                     name={game.name}
@@ -54,23 +57,30 @@ const Game = () => {
                     save={save}
                 />
                 : 
-                <GameDetails
-                    name={game.name}
-                    image={game.image}
-                    description={game.description}
-                    genres={game.genres}
-                    platforms={game.platforms}
-                    rating={game.rating}
-                    date={game.date}
-                    id={game.id}
-                    created = {game.created}
-                    handleEdit={handleEdit}
-                />
+                <div>
+                    <GameDetails
+                        name={game.name}
+                        image={game.image}
+                        description={game.description}
+                        genres={game.genres}
+                        platforms={game.platforms}
+                        rating={game.rating}
+                        date={game.date}
+                        id={game.id}
+                        created = {game.created}
+                        handleEdit={handleEdit}
+                    />
+                    { game.created?
+
+                        <button onClick={handleEdit} className={style.created}>Edit</button>
+                        
+                        : null
+                    }
+                </div>
+
                 }
                 
-                <Link to={`/home`}>
-                    <button> back </button>
-                </Link>   {/* link to the detail of the game */}
+               
             </div>  
         }
         </div>

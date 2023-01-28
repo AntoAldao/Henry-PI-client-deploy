@@ -22,4 +22,7 @@
     height: 35px;
     border: none;
     background-color: transparent;
+    color: white;
+    font-family: "vt323";
+    font-size: 1.2rem;
 }

@@ -1,41 +1,62 @@
+.divpantalla{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 55vw;
+    height: 90vh;
+    background-color: rgb(68, 62, 78);
+    border-radius: 90px;
+    justify-content: center;
+    box-sizing: border-box;
+}
 .general{
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    width: 45vw;
+    height: 75vh;
+    background-color: black;
+    justify-content: center;
+    border-radius: 15%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 20px;
+    position: relative;
 }
+
 .card{
-    width: 70%;
-    height: 100%;
-   justify-content: center;
-   border: none;
-   display: flex;
+    width: 85%;
+    height: 50%;
+    justify-content: center;
+    border: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 55px;
+    /* padding-top: 55px; */
 }
 .image{
-    width: 420px;
+    width: 350px;
+    border-radius: 25px;
+    
 }
 .name{
     font-family: "Press Start 2P";
-    font-size: 1.8rem;
-    text-shadow: 3px 3px 0 rgb(120, 120, 120), -1px -1px 0 rgb(120, 120, 120), 1px -1px 0 rgb(120, 120, 120), -1px 1px 0 rgb(120, 120, 120), 1px 1px 0 rgb(120, 120, 120);
+    font-size: 1.2rem;
+    text-shadow: 3px 3px 0 rgb(200, 200, 200), 
+                -1px -1px 0 rgb(200, 200, 200),
+                1px -1px 0 rgb(200, 200, 200), 
+                -1px 1px 0 rgb(200, 200, 200), 
+                1px 1px 0 rgb(200, 200, 200);
     
 }
-.description{
-    /* font-family: "Press Start 2P"; */
-    font-size: 15px
-}
+
 .imyname{
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
-.divimage{
-    width: 450px;
-    /* position: relative; */
-}
+
 .list{
     list-style: none;
     display: flex;
@@ -46,9 +67,14 @@
 }
 li{
     list-style: none;
+    margin-top: 15px;
 }
 .liinfo{
     font-family:"Press Start 2P";
+    font-size: 0.8rem;
+}
+.titles{
+    color: rgb(172, 126, 0);
 }
 .buttonsinfo{
     width: 100%;
@@ -59,21 +85,23 @@ li{
     justify-content: flex-start;
 
 }
+
 .binfo{
     border: none; 
     background-color: transparent;
     color: transparent;
     cursor: pointer;
+    
 }
 .binfo:focus{
-    color: black;
     outline: none;
 }
 
 .binfo:focus span{
-    font-size: 15px;
-    font-weight: 700;
     font-family: "Press Start 2P";
+    color: rgb(172, 126, 0);
+    font-size: 0.8rem;
+    font-weight: 700;
     animation-name: parpadeo;
     animation-duration: 0.5s;
     animation-iteration-count: infinite;
@@ -93,4 +121,42 @@ li{
     0% { opacity: 0.0; }
     50% { opacity: 1.0; }
     100% { opacity: 0.0; }
+}
+
+.divinfo{
+    width: 90%;
+    height:90%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 6px;
+    /* height: auto; */
+    color: white;
+    font-family: "vt323";
+    font-size: 25px;
+    font-weight: 100;
+    overflow-y: auto;
+    /* text-align: justify; */
+}
+
+.buttonclose{
+    width: 50px;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    border-radius: 15px;
+    background-color: transparent;
+    color: white;
+    font-family: "vt323";
+    font-size: 25px;
+    /* border: white; */
+}
+.buttonclose:hover{
+    color: rgb(179, 3, 3);
+    
 }
