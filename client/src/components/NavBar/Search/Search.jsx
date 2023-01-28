@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import {getVideogamesByName, setVideogames,setPage} from '../../redux/actions/index';
+import {getVideogamesByName, setVideogames,setPage} from '../../../redux/actions/index';
+import style from './Search.module.css';
+import lupa from '../../../assets/lupa3.svg';
 
 const Search = (props) => {
     const dispatch = useDispatch();
@@ -18,13 +20,15 @@ const Search = (props) => {
         e.preventDefault();
         dispatch(getVideogamesByName(name));
         dispatch(setPage(1));
-        props.setLoading(true)
+        props.loading(true)
     }
 
     return (
-        <div className="search">
-            <input type="text" value={name} onChange = {handleChange}/>
-            <button onClick={handleSubmit}>Search</button>
+        <div className={style.search}>
+            <input type="text" value={name} onChange = {handleChange} className={style.input}/>
+            <button onClick={handleSubmit} className={style.button}>
+                <img src={lupa} alt="lupa" width="20px" height="20px"/>
+            </button>
         </div>
     );
 }

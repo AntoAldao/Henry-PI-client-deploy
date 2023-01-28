@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
-import {filterByCreatedOrApi} from "../../redux/actions/index"
+import {filterByCreatedOrApi} from "../../../redux/actions/index"
 import { useDispatch } from "react-redux";
-import {setPage } from "../../redux/actions/index";
+import {setPage } from "../../../redux/actions/index";
+import style from "./FilterByCreated.module.css";
 
 const FilterByCreatedOrApi = () => {
 
@@ -17,11 +18,11 @@ const FilterByCreatedOrApi = () => {
 
 
     return (
-        <div >
-            <select name="filter" value={filter} onChange={handleChange}>
-            <option value="">Filter by ... </option>
+        <div className={style.divFilterC}>
+            <select name="filter" value={filter} onChange={handleChange} className={style.selecfilterC}>
+            <option value="">Filter by ▼ </option>
                 {filters.map((filter) => {
-                    return <option value={filter} key={filter}>{filter}</option>
+                    return <option value={filter} key={filter} className={style.options}>{filter}</option>
                 }
                 )}
             </select>

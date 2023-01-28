@@ -1,0 +1,22 @@
+.divFilterG{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 3px white;
+    box-shadow: 0 0 5px 2px #8F00FF, inset 0 0 4px 2px #8F00FF;
+    border-radius: 10px;
+}
+.selecfilterG{
+    text-align: center;
+    height: 30px;
+    font-family: "Press Start 2P";
+    text-shadow: 2px 2px 0 #8F00FF, -1px -1px 0 #8F00FF, 1px -1px 0 #8F00FF, -1px 1px 0 #8F00FF, 1px 1px 0 #8F00FF;
+    background-color: transparent;
+    border: none;
+    appearance: none;
+}
+.selecfilterG option{ 
+    text-emphasis: none;
+    background:black;
+    color: white;
+}

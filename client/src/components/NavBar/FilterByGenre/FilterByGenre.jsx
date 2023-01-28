@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
-import { filterByGenre } from "../../redux/actions/index";
+import { filterByGenre } from "../../../redux/actions/index";
 import { useDispatch } from "react-redux";
-import {setPage } from "../../redux/actions/index";
+import {setPage } from "../../../redux/actions/index";
+import style from "./FilterByGenre.module.css";
 
 const FilterByGenre = () => {
     const genres = useSelector((state) => state.genres);
@@ -13,9 +14,9 @@ const FilterByGenre = () => {
         dispatch(setPage(1));
     };
     return (
-        <div >
-            <select name="filter" value={FilteredByGenre} onChange={handleChange}>
-                <option value="">Filter by genre</option>
+        <div className={style.divFilterG}>
+            <select name="filter" value={FilteredByGenre} onChange={handleChange} className={style.selecfilterG}>
+                <option value="">Filter by genre ▼ </option>
                 {genres.map((genre) => {
                     return <option value={genre.name} key={genre.id}>{genre.name}</option>
                 }

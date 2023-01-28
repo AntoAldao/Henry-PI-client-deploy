@@ -1,49 +1,83 @@
 .card{
-   border-radius: 10%;
-   background-image: url("../../assets/cards.png");
-   background-size: contain;
-   background-repeat: no-repeat;
-   background-position: center;
-   width: 425px;
-   height: 330px;
+   border-radius: 40px; 
+   width: 350px;
+   height: 350px;
+   display: flex;
+   flex-direction: column;
+   border:  none;
+   background-color: #1e1e1e;
+   padding: 0;
+   justify-content: space-between;
+   color: white;
    position: relative;
+   box-shadow: 0 0 5px 2px #00C8F4, inset 0 0 4px 2px #00C8F4;
 }
-.image{
-    width: 190px;
-    height: 135px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 23px;
-    margin: auto;
-} 
+.card:hover{
+    box-shadow: 0 0 5px 2px #8F00FF, inset 0 0 4px 2px #8F00FF;
+}
+
 .name {
-    font-family: pretendo;
-    font-size: 12px;
-    font-weight: 400;
+    font-size: 20px;
+    font-weight: 800;
     text-align: center;
     margin: 0;
-    color: rgb(159, 159, 163);
+
 }
 .list{
-    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    justify-content: space-around; 
 }
-.buttonname{
+.list li{
+    box-sizing: border-box;
+    color: #0680f1;
+    border: #0680f1 1px solid;
     border-radius: 9999px;
-    width: fit-content;
-    height: fit-content;
+    padding: 5%;
+    font-size: 13px;
+}
+
+.buttonname{
+    width: 50px;
+    height: 50px;
     align-items: center;
     justify-content: center;
-    background: none;
-    position: absolute;
-    top: 0px;
-    left: 0;
-    right: 0;
-    bottom: 215px;
-    margin: auto;
-    border: solid 2px  rgb(105, 103, 103);
+    background: #0680f1;
+    border-radius: 100%;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-weight: 800;
 }
 .genres{
-    display: none;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.image{
+    width: 100%;
+    border-radius: 40px 40px 0px 0px;
+} 
+.cardinfo{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    background-color: #1e1e1e;
+    position: absolute;
+    bottom: 0;
+    z-index: 25;
+    border-radius: 0px 0px 40px 40px;
+    
 }

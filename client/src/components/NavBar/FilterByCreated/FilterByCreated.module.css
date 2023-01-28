@@ -1,0 +1,25 @@
+.divFilterC{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 3px white;
+    box-shadow: 0 0 5px 2px #FAC100, inset 0 0 4px 2px #FAC100;
+    border-radius: 10px;
+}
+.selecfilterC{
+    height: 30px;
+    width: 200px;
+    font-family: "Press Start 2P";
+    text-align: center;
+    appearance: none;
+    text-shadow: 2px 2px 0 #FAC100, -1px -1px 0 #FAC100, 1px -1px 0 #FAC100, -1px 1px 0 #FAC100, 1px 1px 0 #FAC100;
+    background-color: transparent;
+    border: none;
+    
+}
+
+.selecfilterC option{ 
+    text-emphasis: none;
+    background:black;
+    color: white;
+}

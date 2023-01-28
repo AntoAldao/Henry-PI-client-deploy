@@ -1,21 +1,128 @@
+.generaldiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 98.7vw;
+    background-image: url("../../assets/darkwall3.jpg");
+    background-position: center; 
+    background-size: 100vw auto;
+    padding-top: 20px;
+    gap: 45px;
+
+}
+.divhys{
+    width: 92%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* padding-right: 30px; */
+    /* background-color: black; */
+}
+.video{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+    /* padding-left: 30px; */
+
+
+}
+.home{
+    font-family: "Press Start 2P";
+    font-size: 30px;
+    color: black;
+    text-shadow: 3px 3px 0 #00C8F4, -1px -1px 0 #00C8F4, 1px -1px 0 #00C8F4, -1px 1px 0 #00C8F4, 1px 1px 0 #00C8F4;
+}
+.divnav{
+    width: 90%;
+    height: 115px;
+    display: flex;
+    flex-direction: row;
+    border:solid 3px white;
+    box-shadow: 0 0 7px 3px #00C8F4, inset 0 0 8px 3px #00C8F4, 0 0 10px 4px #00C8F4;
+    padding-left: 25px;
+    padding-top: 25px;
+    position: relative;
+    border-radius: 25px;
+    
+}
+.filters{
+    width: 92%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+    
+}
+.pages{
+    display: flex;
+    justify-content: center;
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    bottom: -18px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    gap: 10px;
+}
+.buttonpages{
+
+    background-color: transparent;
+    border:solid 2px white;
+    border-radius: 7px;
+    gap: 3px;
+    box-shadow: 0 0 6px 2px #05FF00, inset 0 0 8px 3px #05FF00;
+    font-family: "Press Start 2P";
+    font-size: 13px;
+    text-shadow: 2px 2px 0 #05FF00, -1px -1px 0 #05FF00, 1px -1px 0 #05FF00, -1px 1px 0 #05FF00, 1px 1px 0 #05FF00;
+    background: rgba( 255, 255, 255, 0.3 );
+    backdrop-filter: blur( 10px );
+    -webkit-backdrop-filter: blur( 10px );
+    text-align: center;
+}
+.buttonpages:hover{
+    border:solid 2px black;
+}
+.headphones{
+    height: 70px;
+    position: relative;
+    right: -35px;
+    top: -68px;
+}
+.bolt{
+    height: 100px;
+    width: fit-content;
+    position: relative;
+    left: -60px;
+    top: 10px;
+}
+.bolt img{
+    height: 100px;
+}
 .card{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     padding: 10px;
-    margin: 10px;
-    gap: 10px;
+    row-gap: 30px;
+    
 }
+
 .divloading{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    height: 15vh;
-    width: 15vw;
-    background-image: url("../../assets/pacman2.svg");
-    background-size: cover;
+    height: 150px;
+    width: 200px;
+    background-image: url("../../assets/pacman3.svg");
+    background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;;
+    background-position: center;
     
 }

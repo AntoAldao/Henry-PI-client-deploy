@@ -1,16 +1,17 @@
 import GameCard from "../../components/GameCard/GameCard";
 import React, { useEffect } from "react";
-import ButtonCreate from "../../components/NavBar/ButtonCreate";
+import ButtonCreate from "../../components/NavBar/ButtonCreate/ButtonCreate";
 import style from "./Home.module.css"
 import { useSelector } from "react-redux";
-import FilterByCreatedOrApi from "../../components/NavBar/FilterByCreated";
-import FilterByGenre from "../../components/NavBar/FilterByGenre";
+import FilterByCreatedOrApi from "../../components/NavBar/FilterByCreated/FilterByCreated";
+import FilterByGenre from "../../components/NavBar/FilterByGenre/FilterByGenre";
 import { useDispatch } from "react-redux";
-import {setVideogames, setPage } from "../../redux/actions/index";
-import Order  from "../../components/NavBar/Order"
-import Search from "../../components/NavBar/Search";
-import pacman from "../../assets/pacman2.svg"
-
+import {setVideogames, setPage, getVideogames , getGenres} from "../../redux/actions/index";
+import Order  from "../../components/NavBar/Order/Order"
+import Search from "../../components/NavBar/Search/Search";
+import logo from "../../assets/joystick2.svg";
+import headphones from "../../assets/headphones.png";
+import bolt from "../../assets/bolt.svg";
 
 const Home = () => {
     const pages = []
@@ -38,6 +39,12 @@ const Home = () => {
     }
 
     //GET GAMES
+
+    // useEffect(() => {
+    //     dispatch(getVideogames());
+    //     dispatch(getGenres());
+    // }, [])
+
     useEffect(() => {
         dispatch(setVideogames());
         if (page > Math.ceil(videogames.length/15) && page !== 1) {
@@ -63,22 +70,49 @@ const Home = () => {
         }
     }, [videogames])
     return (
-        <div>
-            {!loading?
-                <div>
-                    <h1>Home</h1>
-                    <Search 
-                        loading = {setLoading}
-                    />
-                    <ButtonCreate />
-                    {pages?.map((page, index) => {
-                        return <button key={index} onClick = {handlePage}>{page}</button>
-                    })}
+        
+        <div className={style.generaldiv} style = {{height:`${loading? "100vh":"auto"}`}}>
+            <div className={style.divhys}>
+                <div className={style.video}>
+                    <img src={logo} alt="Logo"  style={{rotate: "-45deg"}}/>
+                    <h1 className={style.home}>VIDEOGAMES</h1>
+                </div>
+                <Search 
+                    loading = {setLoading}
+                />
+            </div>
+            
+            <div className={style.divnav}>
+                <div className={style.bolt}>
+                    <img src={bolt}/>
+                </div>
+                <div className={style.filters}>
                     <FilterByCreatedOrApi />
                     <FilterByGenre />
                     <Order />
+                </div>
+                <ButtonCreate />    
+                <div className={style.pages}>
+                    {pages?.map((p, index) => {
+                            return (
+                                <button key={index} 
+                                        onClick = {handlePage} 
+                                        className={style.buttonpages}
+                                        style={{boxShadow: p === Number(page) ? "0 0 6px 2px #FF005C, inset 0 0 8px 3px #FF005C" :null,
+                                                textShadow: p === Number(page) ? "2px 2px 0 #FF005C, -1px -1px 0 #FF005C, 1px -1px 0 #FF005C, -1px 1px 0 #FF005C, 1px 1px 0 #FF005C" :null,}}
+                                >
+                                    {p}
+                                </button>
+                            )
+                        })}
+                </div>
+                <img src={headphones} className={style.headphones}/>
+                
+            </div>
+            {!loading?
+                <div>
 
-                    <div className={style.card}>
+                    <div className={style.card} style = {{height:`${videogames === 'No se encontraron videojuegos'? "100vh":"auto"}`}}>
                         {videogames === 'No se encontraron videojuegos' ? 
                         <h1>No se encontraron videojuegos</h1>            
                         : videogames?.slice((page-1)*15, page*15).map((game, index) => {
