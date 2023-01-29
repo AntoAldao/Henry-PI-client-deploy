@@ -76,7 +76,7 @@ const CreateGame = (props) => {
                 delete body.rating
             }
             try {
-                const response = await axios.post('http://localhost:3001/api/videogames', body)
+                const response = await axios.post('videogames', body)
                  setGame({
                      name: "",
                      image: "",

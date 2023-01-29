@@ -6,7 +6,7 @@ import axios from "axios";
 const GameCard = (props) => {
     const dispatch = useDispatch();
     const deleteGame = () => {
-        axios.delete(`http://localhost:3001/api/videogames/${props.id}`)
+        axios.delete(`videogames/${props.id}`)
         .then(response => alert(response.data))
         dispatch(getVideogames())
         dispatch(setLoading(true))

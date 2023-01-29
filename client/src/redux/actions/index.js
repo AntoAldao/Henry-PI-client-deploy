@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 export const GET_VIDEOGAMES = 'GET_VIDEOGAMES';
 export const SET_VIDEOGAMES = 'SET_VIDEOGAMES';
 export const GET_VIDEOGAMES_BY_NAME = 'GET_VIDEOGAMES_BY_NAME';
@@ -15,8 +14,9 @@ export const LOADING = 'LOADING';
 export const DELETE_SEARCHED = 'DELETE_SEARCHED';
 export const STATETOSAVE = 'STATETOSAVE';
 
+console.log(process.env.URL_RAILWAY)
 export const getVideogames = () => async (dispatch) => {
-    const response = await axios.get('http://localhost:3001/api/videogames')
+    const response = await axios.get('videogames')
     const data = response.data;
     return (
         dispatch({
@@ -37,7 +37,7 @@ export const setVideogames = () => async (dispatch) => {
 export const getVideogamesByName = (name) => async (dispatch) => {
     let data = ""
     try {
-        const response = await axios.get(`http://localhost:3001/api/videogames?name=${name}`)
+        const response = await axios.get(`videogames?name=${name}`)
         data = response.data;
     } catch (error) {
         data = []
@@ -51,7 +51,7 @@ export const getVideogamesByName = (name) => async (dispatch) => {
 }
 
 export const getGenres = () => async (dispatch) => {
-    const response = await axios.get('http://localhost:3001/api/genres')
+    const response = await axios.get('genres')
     const data = response.data;
     return (
         dispatch({
@@ -64,7 +64,7 @@ export const getGenres = () => async (dispatch) => {
 
 export const putVideogame = (payload) => async (dispatch) => {
     const {id,...body} = payload;
-    const response = await axios.put(`http://localhost:3001/api/videogame/${id}`, body)
+    const response = await axios.put(`videogame/${id}`, body)
     const data = response.data;
     return (
         dispatch({

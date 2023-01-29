@@ -4,6 +4,8 @@ import Home from './pages/Home/Home';
 import LandingPage from './pages/LandingPage/LandingPage';
 import Game from './pages/Game/Game';
 import Create from './pages/Create/Create';
+import axios from 'axios';
+axios.defaults.baseURL = 'https://henry-pi-production.up.railway.app/api/';
 
 
 //aca van las rutas

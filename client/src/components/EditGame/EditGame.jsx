@@ -105,7 +105,7 @@ const EditGame = (props) => {
             delete body.date
         }
         try {
-            const response = await axios.put(`http://localhost:3001/api/videogames/${props.id}`, body)
+            const response = await axios.put(`videogames/${props.id}`, body)
             alert(response.data)
             dispatch(getVideogames())
             dispatch(stateToSave());

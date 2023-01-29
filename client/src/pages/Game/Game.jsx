@@ -21,15 +21,17 @@ const Game = () => {
     }
     const [loading, setLoading] = useState(true)
     
+    const URL ="https://henry-pi-production.up.railway.app/api/"
+
     useEffect(() => {
-        fetch(`http://localhost:3001/api/videogames/${id}`)
+        fetch(`${URL}videogames/${id}`)
         .then(response => response.json())
         .then(data => setGame(data))
         .then(() => setLoading(false))
     }, [])
 
     useEffect(() => {
-        fetch(`http://localhost:3001/api/videogames/${id}`)
+        fetch(`${URL}videogames/${id}`)
         .then(response => response.json())
         .then(data => setGame(data))
     }, [chages])
