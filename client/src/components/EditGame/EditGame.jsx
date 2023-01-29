@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { useState } from "react"
 import axios from "axios"
 import { useDispatch } from "react-redux"
-import { getVideogames } from "../../redux/actions/index"
+import { getVideogames, stateToSave } from "../../redux/actions/index"
 
 
 
@@ -108,6 +108,7 @@ const EditGame = (props) => {
             const response = await axios.put(`http://localhost:3001/api/videogames/${props.id}`, body)
             alert(response.data)
             dispatch(getVideogames())
+            dispatch(stateToSave());
             props.save()
 
         }

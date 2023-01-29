@@ -10,9 +10,10 @@ import {
     LOADING,
     DELETE_SEARCHED
 } from '../actions/index.js';
+import { LocalStorageRedux } from '../../useLocalStorage.js';
 
 
-const initialState = {
+let initialState = {
     allVideogames : [],
     videogames : [],
     genres : [],
@@ -33,6 +34,9 @@ const initialState = {
     searchedgames: [],
     isSearched: false
 };
+
+initialState = LocalStorageRedux(initialState)[0]()
+// console.log(LocalStorageRedux(initialState)[0]())
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_VIDEOGAMES:
@@ -168,10 +172,33 @@ const rootReducer = (state = initialState, action) => {
                 searchedgames: [],
                 isSearched: false
             }
+        
         default:
+            LocalStorageRedux(initialState)[1](state)
             return {...state};
 
     }
 
 };
+
+// const setLocalStorage = (state = initialState) => {
+
+//     let stateToSave = {
+//         allVideogames : state.allVideogames,
+//         videogames : state.videogames,
+//         genres : state.genres,
+//         FilteredByGenre : state.FilteredByGenre,
+//         FilteredByCreatedOrApi : state.FilteredByCreatedOrApi,
+//         OrderBy : state.OrderBy,
+//         page : state.page,
+//         loading : state.loading,
+//         searchedgames : state.searchedgames,
+//         isSearched : state.isSearched
+//     }
+//     LocalStorageRedux[1](stateToSave)
+
+//     return stateToSave
+// }
+
+
 export default rootReducer;

@@ -1,12 +1,13 @@
 import {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import {getVideogamesByName, setVideogames,setPage,setLoading,deleteSearched} from '../../../redux/actions/index';
+import {getVideogamesByName, setVideogames,setPage,setLoading,deleteSearched,stateToSave} from '../../../redux/actions/index';
 import style from './Search.module.css';
 import lupa from '../../../assets/lupa3.svg';
+import { useLocalStorage } from '../../../useLocalStorage';
 
 const Search = () => {
     const dispatch = useDispatch();
-    const [name, setName] = useState("");
+    const [name, setName] = useLocalStorage('name', '');
 
     const handleChange = (e) => {
         setName(e.target.value);
@@ -15,6 +16,7 @@ const Search = () => {
             dispatch(deleteSearched());
             dispatch(setVideogames());
             dispatch(setPage(1));
+            dispatch(stateToSave());
         }
     }
     const handleSubmit = (e) => {
@@ -22,6 +24,7 @@ const Search = () => {
         dispatch(getVideogamesByName(name));
         dispatch(setPage(1));
         dispatch(setLoading(true))
+        dispatch(stateToSave());
     }
 
     return (

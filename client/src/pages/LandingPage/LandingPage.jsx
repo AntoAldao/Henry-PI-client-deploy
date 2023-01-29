@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useDispatch} from "react-redux";
-import { getVideogames, getGenres , setVideogames} from "../../redux/actions/index";
+import { getVideogames, getGenres , setVideogames,stateToSave} from "../../redux/actions/index";
 import style from "./LandingPage.module.css"
 
 const LandingPage = () => {
@@ -10,6 +10,7 @@ const LandingPage = () => {
         dispatch(getVideogames());
         dispatch(getGenres());
         dispatch(setVideogames());
+        dispatch(stateToSave());
     }, [])
 
     return (

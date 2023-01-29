@@ -5,7 +5,7 @@ import style from "./CreateGame.module.css"
 import { useEffect } from "react"
 import axios from "axios"
 import { useDispatch } from "react-redux"
-import { getVideogames,setLoading } from "../../redux/actions/index"
+import { getVideogames,setLoading, stateToSave} from "../../redux/actions/index"
 
 
 
@@ -99,6 +99,7 @@ const CreateGame = (props) => {
                 alert(response.data)
                 dispatch(getVideogames())
                 dispatch(setLoading(true))
+                dispatch(stateToSave());
                 
             } catch (error) {
                 alert(error.message)

@@ -13,6 +13,7 @@ export const ORDER= 'ORDER';
 export const SETPAGE = 'SETPAGE';
 export const LOADING = 'LOADING';
 export const DELETE_SEARCHED = 'DELETE_SEARCHED';
+export const STATETOSAVE = 'STATETOSAVE';
 
 export const getVideogames = () => async (dispatch) => {
     const response = await axios.get('http://localhost:3001/api/videogames')
@@ -61,7 +62,6 @@ export const getGenres = () => async (dispatch) => {
     
 }
 
-
 export const putVideogame = (payload) => async (dispatch) => {
     const {id,...body} = payload;
     const response = await axios.put(`http://localhost:3001/api/videogame/${id}`, body)
@@ -73,7 +73,6 @@ export const putVideogame = (payload) => async (dispatch) => {
         })
     )
 }
-
 
 export const filterByGenre = (genre) => async (dispatch) => {
     return (
@@ -126,6 +125,14 @@ export const deleteSearched = () => (dispatch) => {
     return (
         dispatch({
             type: DELETE_SEARCHED,
+        })
+    )
+}
+
+export const stateToSave = () => (dispatch) => {
+    return (
+        dispatch({
+            type: STATETOSAVE,
         })
     )
 }

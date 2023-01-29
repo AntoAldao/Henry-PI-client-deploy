@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import FilterByCreatedOrApi from "../../components/NavBar/FilterByCreated/FilterByCreated";
 import FilterByGenre from "../../components/NavBar/FilterByGenre/FilterByGenre";
 import { useDispatch } from "react-redux";
-import {setVideogames, setPage,setLoading} from "../../redux/actions/index";
+import {setVideogames, setPage,setLoading,stateToSave} from "../../redux/actions/index";
 import Order  from "../../components/NavBar/Order/Order"
 import Search from "../../components/NavBar/Search/Search";
 import logo from "../../assets/joystick2.svg";
@@ -37,6 +37,8 @@ const Home = () => {
     //PAGINATION
     const handlePage = (e) => {
         dispatch(setPage(e.target.innerHTML))
+        dispatch(stateToSave());
+
        
     }
 
@@ -47,10 +49,12 @@ const Home = () => {
         if (page > Math.ceil(videogames.length/15) && page !== 1) {
             dispatch(setPage(Math.ceil(videogames.length/15)))
         }
+        dispatch(stateToSave());
     }, [allVideogames])
 
     useEffect(() => {
         dispatch(setVideogames());
+        dispatch(stateToSave());
     }, [FilteredByCreatedOrApi,FilteredByGenre,OrderBy,searchedgames])
 
     useEffect(() => {
@@ -65,6 +69,7 @@ const Home = () => {
         else{
             dispatch(setLoading(false))
         }
+        dispatch(stateToSave());
     }, [videogames])
     console.log(useHistory())
     return (
