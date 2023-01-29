@@ -119,27 +119,31 @@ const EditGame = (props) => {
     }
 
     return (
-        <div className={style.card}>
-            {console.log(game)}
-            <form >
-                <h1 className ={style.name}>
-                    <input 
-                        type="text" 
-                        name="name" 
-                        value={game.name} 
-                        onChange={handleChange} 
-                        className ={style.inputsEdit} />
-                </h1>
-                <div className={style.divImage}>
-                    <img src={game.image} alt={game.name} className={style.image}/>
+        <div>
+            <form className={style.card}>
+                <div className={style.divinfo}>
+                    <h2>Name</h2>
+                    <h1 className ={style.name}>
+                        <input 
+                            type="text" 
+                            name="name" 
+                            value={game.name} 
+                            onChange={handleChange} 
+                            className ={style.inputsEdit} />
+                    </h1>
+                </div>
+                <div className={style.divinfo}>
+                    <h2>Image</h2>
                     <input 
                         type="text" 
                         name="image" 
                         value={game.image} 
                         onChange={handleChange} 
                         className ={style.inputsEdit}/>
+                    <img src={game.image} alt={game.name} className={style.image}/>
                 </div>
-                <div>
+                <div className={style.divinfo}>
+                    <h2>Description</h2>
                     <input 
                         type="text" 
                         name="description" 
@@ -147,11 +151,10 @@ const EditGame = (props) => {
                         onChange={handleChange} 
                         className ={style.inputsEdit}/>
                 </div>
-                <div className={style.info}>
-                    <div className={style.genres}>
+                    <div className={style.divinfo}>
                         <h2> Genres</h2>
                         <input type="text" name="genres" value = {genresElected} readOnly={true}/>
-                        <button onClick={handleShowGenres}>Genres</button>
+                        <button onClick={handleShowGenres} className={style.flecha}>▾</button>
                         {showGenres? <div>
                             <select 
                                 name="genres"
@@ -159,15 +162,15 @@ const EditGame = (props) => {
                                 onChange={handleSelectGenres}
                                 value = {game.genres}>
                                 {genres.map((genre) => {
-                                    return <option value={genre.id} key={genre.id}>{genre.name}</option>
+                                    return <option value={genre.id} key={genre.id} className={style.options}>{genre.name}</option>
                                 })}
                             </select>
                         </div>:null}
                     </div>
-                    <div>
+                    <div className={style.divinfo}>
                         <h2> Platforms</h2>
                         <input type="text" name="platform" value = {game.platforms} readOnly={true}/>
-                        <button onClick={handleShowPlatforms}>Platforms</button>
+                        <button onClick={handleShowPlatforms} className={style.flecha}>▾</button>
                         {showPlatforms? <div>
                         <select 
                             name="platforms"
@@ -175,12 +178,12 @@ const EditGame = (props) => {
                             onChange={handleSelectPlatforms}
                             value = {game.platforms}>
                             {platforms.map((platform,index) => {
-                                return <option value={platform} key={index}>{platform}</option>
+                                return <option value={platform} key={index} className={style.options}>{platform}</option>
                             })}
                         </select>
                     </div>:null}
                     </div>
-                    <div>
+                    <div className={style.divinfo}>
                         <h2> Rating</h2>
                         <input 
                             type="text" 
@@ -189,7 +192,7 @@ const EditGame = (props) => {
                             onChange={handleChange} 
                             className ={style.inputsEdit}/>
                     </div>
-                    <div>
+                    <div className={style.divinfo}>
                         <h2> Released</h2>
                         <input 
                             type="text" 
@@ -198,9 +201,9 @@ const EditGame = (props) => {
                             onChange={handleChange} 
                             className ={style.inputsEdit}/>
                     </div>
-                </div> 
-                <button onClick={handleSave}>Save Changes</button>
-                <button onClick={props.handleEdit}>X</button>
+                
+                <button onClick={handleSave} className={style.changes}>Save Changes</button>
+                <button onClick={props.handleEdit} className={style.close}>Close</button>
             </form>
         </div>
 

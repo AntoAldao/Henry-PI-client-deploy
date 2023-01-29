@@ -6,12 +6,13 @@ import { useSelector } from "react-redux";
 import FilterByCreatedOrApi from "../../components/NavBar/FilterByCreated/FilterByCreated";
 import FilterByGenre from "../../components/NavBar/FilterByGenre/FilterByGenre";
 import { useDispatch } from "react-redux";
-import {setVideogames, setPage, getVideogames , getGenres} from "../../redux/actions/index";
+import {setVideogames, setPage,setLoading} from "../../redux/actions/index";
 import Order  from "../../components/NavBar/Order/Order"
 import Search from "../../components/NavBar/Search/Search";
 import logo from "../../assets/joystick2.svg";
 import headphones from "../../assets/headphones.png";
 import bolt from "../../assets/bolt.svg";
+import { useHistory } from "react-router-dom";
 
 const Home = () => {
     const pages = []
@@ -21,9 +22,10 @@ const Home = () => {
     const page = useSelector((state) => state.page);
     const FilteredByCreatedOrApi = useSelector((state) => state.FilteredByCreatedOrApi);
     const FilteredByGenre = useSelector((state) => state.FilteredByGenre);
+    const searchedgames = useSelector((state) => state.searchedgames);
     const OrderBy = useSelector((state) => state.OrderBy);
 
-    const [loading, setLoading] = React.useState(true);
+    const loading = useSelector((state) => state.loading);
 
     //PAGES
     for(let i = 1; i <= Math.ceil(videogames.length/15); i++){
@@ -40,11 +42,6 @@ const Home = () => {
 
     //GET GAMES
 
-    // useEffect(() => {
-    //     dispatch(getVideogames());
-    //     dispatch(getGenres());
-    // }, [])
-
     useEffect(() => {
         dispatch(setVideogames());
         if (page > Math.ceil(videogames.length/15) && page !== 1) {
@@ -54,21 +51,22 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(setVideogames());
-    }, [FilteredByCreatedOrApi,FilteredByGenre,OrderBy])
+    }, [FilteredByCreatedOrApi,FilteredByGenre,OrderBy,searchedgames])
 
     useEffect(() => {
         if (typeof videogames === "object") {
             if (videogames.length > 0) {
-                setLoading(false)
+                dispatch(setLoading(false))
             }
             else{
-                setLoading(true)
+                dispatch(setLoading(true))
             }
         }
         else{
-            setLoading(false)
+            dispatch(setLoading(false))
         }
     }, [videogames])
+    console.log(useHistory())
     return (
         
         <div className={style.generaldiv} style = {{height:`${loading? "100vh":"auto"}`}}>
@@ -77,9 +75,7 @@ const Home = () => {
                     <img src={logo} alt="Logo"  style={{rotate: "-45deg"}}/>
                     <h1 className={style.home}>VIDEOGAMES</h1>
                 </div>
-                <Search 
-                    loading = {setLoading}
-                />
+                <Search />
             </div>
             
             <div className={style.divnav}>
@@ -91,7 +87,10 @@ const Home = () => {
                     <FilterByGenre />
                     <Order />
                 </div>
-                <ButtonCreate />    
+                <ButtonCreate
+                    
+                />
+                    
                 <div className={style.pages}>
                     {pages?.map((p, index) => {
                             return (
@@ -112,9 +111,11 @@ const Home = () => {
             {!loading?
                 <div>
 
-                    <div className={style.card} style = {{height:`${videogames === 'No se encontraron videojuegos'? "100vh":"auto"}`}}>
-                        {videogames === 'No se encontraron videojuegos' ? 
-                        <h1>No se encontraron videojuegos</h1>            
+                    <div className={style.card} 
+                        style = {{height:`${videogames[0] === 'No results found'? "100vh":"auto"}`,
+                        columnGap : `${videogames.length<4? "80px":"0px"}`}}>
+                        {(videogames[0] === 'No results found' || !videogames.length)? 
+                        <h1 className={style.notgames}>No results found</h1>            
                         : videogames?.slice((page-1)*15, page*15).map((game, index) => {
                             return(
                                 <GameCard

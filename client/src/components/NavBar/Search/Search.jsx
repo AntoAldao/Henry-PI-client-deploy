@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import {getVideogamesByName, setVideogames,setPage} from '../../../redux/actions/index';
+import {getVideogamesByName, setVideogames,setPage,setLoading,deleteSearched} from '../../../redux/actions/index';
 import style from './Search.module.css';
 import lupa from '../../../assets/lupa3.svg';
 
-const Search = (props) => {
+const Search = () => {
     const dispatch = useDispatch();
     const [name, setName] = useState("");
 
@@ -12,6 +12,7 @@ const Search = (props) => {
         setName(e.target.value);
         if (e.target.value === "") {
             setName("");
+            dispatch(deleteSearched());
             dispatch(setVideogames());
             dispatch(setPage(1));
         }
@@ -20,7 +21,7 @@ const Search = (props) => {
         e.preventDefault();
         dispatch(getVideogamesByName(name));
         dispatch(setPage(1));
-        props.loading(true)
+        dispatch(setLoading(true))
     }
 
     return (

@@ -110,6 +110,8 @@
     justify-content: space-around;
     padding: 10px;
     row-gap: 30px;
+    /* column-gap: 95px; */
+    /* background: rgb(255, 255, 255); */
     
 }
 
@@ -125,4 +127,32 @@
     background-repeat: no-repeat;
     background-position: center;
     
+}
+.notgames{
+    color: white;
+    font-family: "Lobster Two";
+    font-size: 45px;
+    animation-name: parpadeo;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    border: solid 2px #f7faf7;
+    width: fit-content;
+    height: fit-content;
+    padding: 15px;
+    border-radius: 9999px;
+    box-shadow: 2px 2px 8px 5px #05FF00, inset 2px 2px 6px 4px #05FF00;
+    text-shadow: 2px 2px 0 #05FF00, -1px -1px 0 #05FF00, 1px -1px 0 #05FF00, -1px 1px 0 #05FF00, 1px 1px 0 #05FF00;
+}
+
+@keyframes parpadeo {
+    0% { opacity: 0.5; }
+    50% { opacity: 1.0; }
+    100% { opacity: 0.5; }
+}
+
+@-webkit-keyframes parpadeo {
+    0% { opacity: 0.5; }
+    50% { opacity: 1.0; }
+    100% { opacity: 0.5; }
 }

@@ -43,19 +43,22 @@ const Game = () => {
                     <button className={style.back}> back </button>
                 </Link>   {/* link to the detail of the game */}
                 {edit ? 
-                <EditGame
-                    name={game.name}
-                    image={game.image}
-                    description={game.description}
-                    genres={game.genres}
-                    platforms={game.platforms}
-                    rating={game.rating}
-                    date={game.date}
-                    id={game.id}
-                    created = {game.created}
-                    handleEdit={handleEdit}
-                    save={save}
-                />
+                <div>
+                    <h1 className={style.title}>Edit Game</h1>
+                    <EditGame
+                        name={game.name}
+                        image={game.image}
+                        description={game.description}
+                        genres={game.genres}
+                        platforms={game.platforms}
+                        rating={game.rating}
+                        date={game.date}
+                        id={game.id}
+                        created = {game.created}
+                        handleEdit={handleEdit}
+                        save={save}
+                    />
+                </div>
                 : 
                 <div>
                     <GameDetails

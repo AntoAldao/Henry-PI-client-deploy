@@ -11,6 +11,8 @@ export const FILTER_BY_GENRE = 'FILTER_BY_GENRE';
 export const FILTER_BY_CREATED_OR_API = 'FILTER_BY_CREATED_OR_API';
 export const ORDER= 'ORDER';
 export const SETPAGE = 'SETPAGE';
+export const LOADING = 'LOADING';
+export const DELETE_SEARCHED = 'DELETE_SEARCHED';
 
 export const getVideogames = () => async (dispatch) => {
     const response = await axios.get('http://localhost:3001/api/videogames')
@@ -36,12 +38,9 @@ export const getVideogamesByName = (name) => async (dispatch) => {
     try {
         const response = await axios.get(`http://localhost:3001/api/videogames?name=${name}`)
         data = response.data;
-        console.log(data)
     } catch (error) {
-       
-        data = error.response.data
+        data = []
     }
-    
     return (
         dispatch({
             type: GET_VIDEOGAMES_BY_NAME,
@@ -110,6 +109,23 @@ export const setPage = (payload) => (dispatch) => {
             type: SETPAGE,
             payload: payload
 
+        })
+    )
+}
+
+export const setLoading = (payload) => (dispatch) => {
+    return (
+        dispatch({
+            type: LOADING,
+            payload: payload
+        })
+    )
+}
+
+export const deleteSearched = () => (dispatch) => {
+    return (
+        dispatch({
+            type: DELETE_SEARCHED,
         })
     )
 }

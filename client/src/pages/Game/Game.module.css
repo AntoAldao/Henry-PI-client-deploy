@@ -11,6 +11,14 @@
     /* padding-top: 20px; */
     position: relative;
 }
+.title{
+    font-size: 30px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f00), to(rgb(236, 221, 11)));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: "Press Start 2P";
+}
 .cardDetail {
     display: flex;
     flex-direction: column;

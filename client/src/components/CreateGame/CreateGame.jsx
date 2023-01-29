@@ -5,11 +5,11 @@ import style from "./CreateGame.module.css"
 import { useEffect } from "react"
 import axios from "axios"
 import { useDispatch } from "react-redux"
-import { getVideogames } from "../../redux/actions/index"
+import { getVideogames,setLoading } from "../../redux/actions/index"
 
 
 
-const CreateGame = () => {
+const CreateGame = (props) => {
     const dispatch = useDispatch()
     const genres = useSelector((state) => state.genres)
     const platforms = useSelector((state) => state.platforms)
@@ -75,9 +75,7 @@ const CreateGame = () => {
             if (game.rating === "") {
                 delete body.rating
             }
-            console.log(body)
             try {
-                console.log(game)
                 const response = await axios.post('http://localhost:3001/api/videogames', body)
                  setGame({
                      name: "",
@@ -100,6 +98,7 @@ const CreateGame = () => {
                  setGenresElected([])
                 alert(response.data)
                 dispatch(getVideogames())
+                dispatch(setLoading(true))
                 
             } catch (error) {
                 alert(error.message)

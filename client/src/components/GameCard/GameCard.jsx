@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import style from "./GameCard.module.css";
 import { useDispatch } from "react-redux";
-import {getVideogames} from "../../redux/actions/index.js"
+import {getVideogames,setLoading} from "../../redux/actions/index.js"
 import axios from "axios";
 const GameCard = (props) => {
     const dispatch = useDispatch();
@@ -9,9 +9,9 @@ const GameCard = (props) => {
         axios.delete(`http://localhost:3001/api/videogames/${props.id}`)
         .then(response => alert(response.data))
         dispatch(getVideogames())
-
-
+        dispatch(setLoading(true))
     }
+
     return (
         <div className={style.card}> 
             <img src={props.image} alt={props.name} className = {style.image}/>

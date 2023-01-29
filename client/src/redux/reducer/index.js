@@ -3,12 +3,12 @@ import {
     SET_VIDEOGAMES,
     GET_VIDEOGAMES_BY_NAME,
     GET_GENRES,
-    PUT_VIDEOGAME,
-    DELETE_VIDEOGAME,
     FILTER_BY_GENRE,
     FILTER_BY_CREATED_OR_API,
     ORDER,
-    SETPAGE
+    SETPAGE,
+    LOADING,
+    DELETE_SEARCHED
 } from '../actions/index.js';
 
 
@@ -16,9 +16,9 @@ const initialState = {
     allVideogames : [],
     videogames : [],
     genres : [],
-    OrderBy : "Order by ... ",
+    OrderBy : "",
     FilteredByGenre : "", 
-    FilteredByCreatedOrApi : "Filter by ... ",
+    FilteredByCreatedOrApi : "",
     platforms : ["PC","PlayStation 5","Xbox One","PlayStation 4","Xbox Series S/X",
                             "Nintendo Switch","iOS","Android","Nintendo 3DS","Nintendo DS",
                             "Nintendo DSi","macOS","Linux","Xbox 360","Xbox","PlayStation 3",
@@ -29,6 +29,9 @@ const initialState = {
                             "Genesis","SEGA Saturn","SEGA CD","SEGA 32X","SEGA Master System","Dreamcast",
                             "3DO","Jaguar","Game Gear","Neo Geo"],
     page: 1,
+    loading: true,
+    searchedgames: [],
+    isSearched: false
 };
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -39,6 +42,13 @@ const rootReducer = (state = initialState, action) => {
             } 
         case SET_VIDEOGAMES:
             let videogames = [...state.allVideogames];
+            if (state.searchedgames.length)  {
+                videogames = [...state.searchedgames];
+            }
+            if (!state.searchedgames.length && state.isSearched){
+                videogames = ["No results found"];
+            }
+
             if (state.OrderBy === "Name A-Z") {
                 videogames = videogames.sort((a, b) => { 
                     if (a.name.toLowerCase() > b.name.toLowerCase()) {
@@ -107,6 +117,10 @@ const rootReducer = (state = initialState, action) => {
 
                 })
             }
+            if(!videogames.length && (state.FilteredByGenre !== "" || state.FilteredByCreatedOrApi !== "" || state.OrderBy !== "")) {
+                videogames = ["No results found"];
+            }
+
 
             return {
                 ...state,
@@ -115,18 +129,14 @@ const rootReducer = (state = initialState, action) => {
         case GET_VIDEOGAMES_BY_NAME:
             return {
                 ...state,
-                videogames : action.payload
+                searchedgames: action.payload,
+                isSearched: true
             }
         case GET_GENRES:
             return {
                 ...state,
                 genres : action.payload
             }
-        // case PUT_VIDEOGAME:
-        //     return {
-        //         ...state,
-        //         allVideogames : action.payload
-        //     }
         case FILTER_BY_GENRE:
             return {
                 ...state,
@@ -147,9 +157,21 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 page : action.payload
             }
+        case LOADING:
+            return {
+                ...state,
+                loading : action.payload
+            }
+        case DELETE_SEARCHED:
+            return {
+                ...state,
+                searchedgames: [],
+                isSearched: false
+            }
         default:
             return {...state};
 
     }
+
 };
 export default rootReducer;
