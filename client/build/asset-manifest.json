@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7a11d339.chunk.css",
+    "main.js": "/static/js/main.fe16eac0.chunk.js",
+    "main.js.map": "/static/js/main.fe16eac0.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.830ec18f.js",
+    "runtime-main.js.map": "/static/js/runtime-main.830ec18f.js.map",
+    "static/js/2.a73753b9.chunk.js": "/static/js/2.a73753b9.chunk.js",
+    "static/js/2.a73753b9.chunk.js.map": "/static/js/2.a73753b9.chunk.js.map",
+    "static/js/3.db831bce.chunk.js": "/static/js/3.db831bce.chunk.js",
+    "static/js/3.db831bce.chunk.js.map": "/static/js/3.db831bce.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.7a11d339.chunk.css.map": "/static/css/main.7a11d339.chunk.css.map",
+    "static/js/2.a73753b9.chunk.js.LICENSE.txt": "/static/js/2.a73753b9.chunk.js.LICENSE.txt",
+    "static/media/bolt.ca744103.svg": "/static/media/bolt.ca744103.svg",
+    "static/media/Create.module.css": "/static/media/darkwall3.bae3ccec.jpg",
+    "static/media/LandingPage.module.css": "/static/media/fondolanding3.8b68bddb.jpg",
+    "static/media/headphones.46c41038.png": "/static/media/headphones.46c41038.png",
+    "static/media/joystick2.3ffba38c.svg": "/static/media/joystick2.3ffba38c.svg",
+    "static/media/lupa3.db8f3787.svg": "/static/media/lupa3.db8f3787.svg",
+    "static/media/Game.module.css": "/static/media/pacman3.74c336b4.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.830ec18f.js",
+    "static/js/2.a73753b9.chunk.js",
+    "static/css/main.7a11d339.chunk.css",
+    "static/js/main.fe16eac0.chunk.js"
+  ]
+}
