@@ -183,8 +183,9 @@ const CreateGame = (props) => {
                         name="image" 
                         value = {game.image} 
                         onChange={handleChange} />
-                    {game.image? <img src={game.image} alt="image" width="100px" height="100px"/>:null}
-                    {errors.image ? <p>{errors.image}</p>:null}
+                    
+                    {errors.image ? <p>{errors.image}</p>:
+                    game.image? <img src={game.image} alt="image" width="100px" height="100px"/>:null}
                 </div>
 
                 <div className={style.divinfo}>
