@@ -13,6 +13,7 @@ const CreateGame = (props) => {
     const dispatch = useDispatch()
     const genres = useSelector((state) => state.genres)
     const platforms = useSelector((state) => state.platforms)
+    const allVideogames = useSelector((state) => state.allVideogames)
     const [disabled, setDisabled] = useState(true)
     const [genresElected, setGenresElected] = useState([])
     
@@ -62,7 +63,7 @@ const CreateGame = (props) => {
         setErrors(validate({
             ...game,
             [e.target.name]: e.target.value
-        }))
+        }, allVideogames))
     }
 
     const handleSubmit = async(e) => {
@@ -76,7 +77,7 @@ const CreateGame = (props) => {
                 delete body.rating
             }
             try {
-                const response = await axios.post('videogames', body)
+                const response = await axios.post('http://localhost:3001/api/videogames', body)
                  setGame({
                      name: "",
                      image: "",
@@ -183,9 +184,8 @@ const CreateGame = (props) => {
                         name="image" 
                         value = {game.image} 
                         onChange={handleChange} />
-                    
-                    {errors.image ? <p>{errors.image}</p>:
-                    game.image? <img src={game.image} alt="image" width="100px" height="100px"/>:null}
+                    {game.image? <img src={game.image} alt="image" width="100px" height="100px"/>:null}
+                    {errors.image ? <p>{errors.image}</p>:null}
                 </div>
 
                 <div className={style.divinfo}>
