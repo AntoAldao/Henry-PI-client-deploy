@@ -133,7 +133,7 @@ const CreateGame = (props) => {
         setErrors(validate({
             ...game,
             genres: genresState
-        }))
+        }, allVideogames))
     }
     
 
@@ -154,7 +154,7 @@ const CreateGame = (props) => {
         setErrors(validate({
             ...game,
             platforms: platformsState
-        }))
+        }, allVideogames))
         
     }
 
@@ -266,4 +266,4 @@ const CreateGame = (props) => {
 }
 
 
-export default CreateGame
+export default CreateGame;

@@ -15,7 +15,7 @@ const  validate = (game,allVideogames) => {
     if (!game.name  ) {
         errors.name ="Name is required"
     }
-    if(names.includes(game.name.toLowerCase())) {
+    else if(names.includes(game.name.toLowerCase())) {
         errors.name = "Name already exists"
     }
         
