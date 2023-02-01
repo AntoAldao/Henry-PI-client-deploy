@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 function isUrl(s) {   
     var regexp = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g;
     var regexp2 = /[-a-zA-Z0-9@:%.\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%\+.~#?&//=]*)?/gi;
@@ -37,11 +36,11 @@ const  validate = (game,allVideogames) => {
     else if (parseFloat(game.rating) < 0 || parseFloat(game.rating) > 5) {
         errors.rating = "Rating must be between 0 and 5"
     }
-    else if (!game.released ) {
-        errors.released = "Release date is required"
+    else if (!game.date) {
+        errors.date = "Release date is required"
     }
-    else if (!isDate(game.released) && game.released !== "") {
-        errors.released = "Release date must be a valid date (YYYY-MM-DD)"
+    else if (!isDate(game.date) && game.date !== "") {
+        errors.date = "Release date must be a valid date (YYYY-MM-DD)"
     }
 
     

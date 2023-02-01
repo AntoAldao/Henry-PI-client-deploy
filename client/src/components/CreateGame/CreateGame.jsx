@@ -27,7 +27,7 @@ const CreateGame = (props) => {
         genres: [],
         platforms: [],
         rating:"",
-        released: ""
+        date: ""
     })
 
     const [errors, setErrors] = useState({
@@ -37,7 +37,7 @@ const CreateGame = (props) => {
         genres: "",
         platforms: "",
         rating: "",
-        released: ""
+        date: ""
     })
     
     const handleShowGenres = () => {
@@ -94,7 +94,7 @@ const CreateGame = (props) => {
                      genres: "",
                      platforms: "",
                      rating: "",
-                     released: ""
+                     date: ""
                  })
                  setGenresElected([])
                 alert(response.data)
@@ -253,10 +253,10 @@ const CreateGame = (props) => {
                     <label>Released</label>
                     <input 
                         type="text" 
-                        name="released" 
-                        value = {game.released} 
+                        name="date" 
+                        value = {game.date} 
                         onChange={handleChange}/>
-                    {errors.released ? <p>{errors.released}</p>:null}
+                    {errors.date? <p>{errors.date}</p>:null}
                 </div>
                 <button type="submit" disabled = {disabled} className={style.create}>Create</button>
             </form>

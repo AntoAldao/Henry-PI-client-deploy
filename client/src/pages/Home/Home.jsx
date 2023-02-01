@@ -65,11 +65,14 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(setVideogames());
+        dispatch(stateToSave());
+    }, [allVideogames])
+    useEffect(() => {
         if (page > Math.ceil(videogames.length/15) && page !== 1) {
             dispatch(setPage(Math.ceil(videogames.length/15)))
         }
         dispatch(stateToSave());
-    }, [allVideogames])
+    }, [videogames])
 
     useEffect(() => {
         dispatch(setVideogames());
