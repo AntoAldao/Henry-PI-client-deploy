@@ -202,7 +202,7 @@ const CreateGame = (props) => {
                     <label>Genres</label>
                     <div>
                     <input type="text" name="genres" value = {genresElected} readOnly={true}/>
-                        <button onClick={handleShowGenres} className={style.flecha}>▾</button>
+                        <button  type="button" onClick={handleShowGenres} className={style.flecha}>▾</button>
                         {showGenres? <div>
                             <select 
                                 name="genres"
@@ -222,7 +222,7 @@ const CreateGame = (props) => {
                     <label>Platforms</label>
                     <div>
                     <input type="text" name="platform" value = {game.platforms} readOnly={true}/>
-                        <button onClick={handleShowPlatforms} className={style.flecha}>▾</button>
+                        <button type="button" onClick={handleShowPlatforms} className={style.flecha}>▾</button>
                             {showPlatforms? <div>
                             <select 
                                 name="platforms"
