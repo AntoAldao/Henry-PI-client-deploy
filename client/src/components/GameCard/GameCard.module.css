@@ -11,6 +11,7 @@
    color: white;
    position: relative;
    box-shadow: 0 0 5px 2px #00C8F4, inset 0 0 4px 2px #00C8F4;
+   overflow: hidden;
 }
 .card:hover{
     box-shadow: 0 0 5px 2px #8F00FF, inset 0 0 4px 2px #8F00FF;
