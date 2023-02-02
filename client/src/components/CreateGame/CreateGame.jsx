@@ -85,7 +85,7 @@ const CreateGame = (props) => {
                      genres: [],
                      platforms: [],
                      rating: "",
-                     released: ""
+                     date: ""
                  })
                  setErrors({
                      name: "",
